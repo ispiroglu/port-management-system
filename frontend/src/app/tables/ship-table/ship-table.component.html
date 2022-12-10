@@ -1,0 +1,98 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Ship Table</h4>
+                        <p class="card-category"> List of all licensed ships</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Type
+                                </th>
+                                <th>
+                                    License Number
+                                </th>
+                                <th>
+                                    Length
+                                </th>
+                                <th>
+                                    Motor Power
+                                </th>
+                                <th>
+                                    Tax Rate
+                                </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ship of shipList">
+                                        <td>{{ ship.id }}</td>
+                                        <td>{{ ship.name }}</td>
+                                        <td>{{ ship.shipType }}</td>
+                                        <td>{{ ship.licensePlate }}</td>
+                                        <td>{{ ship.length }}</td>
+                                        <td>{{ ship.motorPower }}</td>
+                                        <td>{{ ship.taxRate }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Filter</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="input-group col-md-3">
+                                <span class="input-group-text" >ID</span>
+                                <textarea class="form-control" formControlName="id"></textarea>
+                            </div>
+                            <div class="input-group col-md-3">
+                                <span class="input-group-text" >Ship Name</span>
+                                <textarea class="form-control"  formControlName="shipName"></textarea>
+                            </div>
+                            <div class="input-group col-md-3">
+                                <span class="input-group-text" >Ship Type</span>
+                                <textarea class="form-control"  formControlName="shipType"></textarea>
+                            </div>
+                            <div class="input-group col-md-3">
+                                <span class="input-group-text" >License Number</span>
+                                <textarea class="form-control" formControlName="licenseNumber"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group col-md-4">
+                                <span class="input-group-text" >Length</span>
+                                <textarea class="form-control" formControlName="length"></textarea>
+                            </div>
+                            <div class="input-group col-md-4">
+                                <span class="input-group-text" >Motor Power</span>
+                                <textarea class="form-control" formControlName="motorPower"></textarea>
+                            </div>
+                            <div class="input-group col-md-4">
+                                <span class="input-group-text" >Tax Rate</span>
+                                <textarea class="form-control" formControlName="taxRate"></textarea>
+                            </div>
+                        </div>
+                        <button class="btn btn-success" type="submit" style="float: right" (click)="onSubmit()">SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

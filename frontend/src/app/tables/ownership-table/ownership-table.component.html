@@ -1,0 +1,75 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Ownership Table</h4>
+                        <p class="card-category"> List of all ownerships</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    ShipId
+                                </th>
+                                <th>
+                                CitizenID
+                                </th>
+                                <th>
+                                    Licensed At
+                                </th>
+                                <th>
+                                    Licensed By
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let ownership of ownershipList ">
+                                    <td>{{ ownership.shipId }}</td>
+                                    <td>{{ ownership.citizenId }}</td>
+                                    <td>{{ ownership.licensedAt }}</td>
+                                    <td>{{ ownership.licensedBy }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title ">Filter</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="input-group col-md-3">
+                            <span class="input-group-text" >Ship Id</span>
+                            <textarea class="form-control" formControlName="shipId"></textarea>
+                        </div>
+                        <div class="input-group col-md-3">
+                            <span class="input-group-text" >CitizenId</span>
+                            <textarea class="form-control"  formControlName="citizenId"></textarea>
+                        </div>
+                        <div class="input-group col-md-3">
+                            <span class="input-group-text" >Licensed At</span>
+                            <textarea class="form-control"  formControlName="licensedAt"></textarea>
+                        </div>
+                        <div class="input-group col-md-3">
+                            <span class="input-group-text" >LicensedBy</span>
+                            <textarea class="form-control" formControlName="licensedBy"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" type="submit" style="float: right" (click)="onSubmit()">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-dashboard></app-dashboard>
+

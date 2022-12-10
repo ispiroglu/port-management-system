@@ -1,0 +1,64 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Crew Table</h4>
+                        <p class="card-category"> List of all crews</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    CitizenID
+                                </th>
+                                <th>
+                                    ShipId
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let crew of crewList ">
+                                    <td>{{ crew.id }}</td>
+                                    <td>{{ crew.citizenId }}</td>
+                                    <td>{{ crew.shipId }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Filter</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="input-group col-md-4">
+                                <span class="input-group-text" >ID</span>
+                                <textarea class="form-control" formControlName="id"></textarea>
+                            </div>
+                            <div class="input-group col-md-4">
+                                <span class="input-group-text" >Citizen Id</span>
+                                <textarea class="form-control"  formControlName="citizenId"></textarea>
+                            </div>
+                            <div class="input-group col-md-4">
+                                <span class="input-group-text" >Ship ID</span>
+                                <textarea class="form-control"  formControlName="shipId"></textarea>
+                            </div>
+                        </div>
+                        <button class="btn btn-success" type="submit" style="float: right" (click)="onSubmit()">SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
