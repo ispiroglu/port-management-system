@@ -1,0 +1,82 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Member Table</h4>
+                        <p class="card-category"> List of all ship members</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    Employee ID
+                                </th>
+                                <th>
+                                    Citizen ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Surname
+                                </th>
+                                <th>
+                                    Position
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let employee of employeeList ">
+                                    <td>{{ employee.employeeId }}</td>
+                                    <td>{{ employee.citizenId }}</td>
+                                    <td>{{ employee.name }}</td>
+                                    <td>{{ employee.surname }}</td>
+                                    <td>{{ employee.position }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Filter</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="input-group col-md-4">
+                                <span class="input-group-text" >Employee Id</span>
+                                <textarea class="form-control" formControlName="employeeId"></textarea>
+                            </div>
+                            <div class="input-group col-md-4">
+                                <span class="input-group-text" >Citizen Id</span>
+                                <textarea class="form-control"  formControlName="citizenId"></textarea>
+                            </div>
+                            <div class="input-group col-md-4">
+                                <span class="input-group-text" >Name</span>
+                                <textarea class="form-control"  formControlName="name"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group col-md-6">
+                                <span class="input-group-text" >Surname</span>
+                                <textarea class="form-control" formControlName="surname"></textarea>
+                            </div>
+                            <div class="input-group col-md-6">
+                            <span class="input-group-text" >Position</span>
+                            <textarea class="form-control" formControlName="positon"></textarea>
+                        </div>
+                        </div>
+                        <button class="btn btn-success" type="submit" style="float: right" (click)="onSubmit()">SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
