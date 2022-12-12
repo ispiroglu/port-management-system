@@ -49,7 +49,8 @@
                         <h4 class="card-title ">Filter</h4>
                     </div>
                     <div class="card-body">
-                        <div class="row">
+                        <form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
                             <div class="input-group col-md-4">
                                 <span class="input-group-text" >CitizenId</span>
                                 <textarea class="form-control"  formControlName="citizenId"></textarea>
@@ -63,17 +64,18 @@
                                 <textarea class="form-control" formControlName="surname"></textarea>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="input-group col-md-9">
-                                <span class="input-group-text" >Age</span>
-                                <textarea class="form-control"  formControlName="age"></textarea>
+                            <div class="row">
+                                <div class="input-group col-md-9">
+                                    <span class="input-group-text" >Age</span>
+                                    <textarea class="form-control"  formControlName="age"></textarea>
+                                </div>
+                                <div class="input-group col-md-3">
+                                    <span class="input-group-text" >Has License</span>
+                                    <input type="checkbox" class=" form-control form-check-input" formControlName="hasLicense" />
+                                </div>
                             </div>
-                            <div class="input-group col-md-3">
-                                <span class="input-group-text" >Has License</span>
-                                <input type="checkbox" class=" form-control form-check-input" formControlName="hasLicense" />
-                            </div>
-                        </div>
-                        <button class="btn btn-success" type="submit" style="float: right" (click)="onSubmit()">SUBMIT</button>
+                            <button class="btn btn-success" type="submit" style="float: right">SUBMIT</button>
+                        </form>
                     </div>
                 </div>
             </div>
