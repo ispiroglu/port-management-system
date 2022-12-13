@@ -1,6 +1,12 @@
-drop table if exists ship
+drop sequence if exists shipIdSeq;
+CREATE SEQUENCE shipIdSeq as integer;
+
+drop sequence if exists shipWorkerIdSeq;
+CREATE SEQUENCE shipWorkerIdSeq as integer;
+
+drop table if exists ship cascade ;
 CREATE TABLE ship (
-  shipId numeric(2) not null,
+  shipId numeric,
   shipType varchar(15) not null,
   shipName varchar(15),
   licensePlate varchar(10),
@@ -9,72 +15,72 @@ CREATE TABLE ship (
   taxRate numeric(2,1) not null,
   primary key(shipId)
 );
-drop table shipowner
-CREATE TABLE shipOwner(
+drop table if exists ship_owner cascade ;
+CREATE TABLE ship_owner(
   citizenId numeric(11) not null,
   fname varchar(15) not null,
   lname varchar(15) not null,
   company varchar(40),
-  age int, 
+  age int CHECK ( age > 18 ),
   primary key (citizenId)
 );
-
+drop table if exists employee cascade;
 CREATE TABLE employee(
  citizenId numeric(11) not null,
- employeeId numeric(5) not null,
+ employeeId numeric not null,
  fname varchar(15) not null,
  lname varchar(15) not null,
- employeePosition varchar(25) not null,
+ position varchar(25) not null,
  primary key (employeeId)
 );
-drop table employee
 
+drop table if exists owner_ship cascade ;
 CREATE TABLE owner_ship(
-	shipId numeric(2) not null,
+	shipId numeric not null,
 	citizenId numeric(11) not null,
 	licensedAt date not null,
-	licensedBy numeric(5) not null,
-	--lisansı verenin employeeIdsi licensedBy olacak
-	primary key (shipId,citizenId),
+	licensedBy numeric not null,
+	primary key (shipId, citizenId),
 	foreign key (licensedBy) references employee(employeeId)
 );
 
---------------------------------
---droplanacak
-CREATE TABLE ship_member(
-citizenId numeric(11) not null,
-fname varchar(15) not null,
-lname varchar(15) not null,
-age int not null,
---has_License boolean not null,
-primary key (citizenId)
+drop table if exists ship_worker cascade ;
+CREATE TABLE ship_worker
+(
+    citizenId numeric(11) primary key ,
+    fname varchar(15) not null,
+    lname varchar(15) not null,
+    age int not null CHECK ( age > 18 ),
+    has_license boolean not null
 );
---------------------------------------
 
+drop table if exists crew;
 CREATE TABLE crew(
-citizenId numeric(11) not null,
-shipId numeric(2) not null,
-has_License boolean not null,
-primary key (shipId,citizenId)
+    id int primary key,
+    citizenId numeric(11) not null,
+    shipId numeric not null,
+    foreign key (citizenId) references ship_worker (citizenId),
+    foreign key (shipId) references ship(shipId)
 );
 
-select * from ship
-select * from ship_owner
-select * from employee
-select * from owner_ship
---select * from ship_member
-select * from crew
+select * from ship;
+select * from ship_owner;
+select * from employee;
+select * from owner_ship;
+select * from ship_worker;
+select * from crew;
 
-INSERT INTO ship VALUES (1, 'merchant', 'Silversea', 'KJ5678',8,15,10);
-INSERT INTO ship VALUES (2, 'merchant', 'Seabourn', 'TK9824',8,18,15);
-INSERT INTO ship VALUES (3, 'private', 'Viking Ocean', 'SJ2308',4,6,1);
-INSERT INTO ship VALUES (4, 'merchant', 'Windstar', 'AB5296',14,15,10);
-INSERT INTO ship VALUES (5, 'private', 'Amadeus', 'DN28914',4,8,1);
-INSERT INTO ship VALUES (6, 'private', 'Hurtigruten', 'MR0043',5,10,4);
-INSERT INTO ship VALUES (7, 'merchant', 'Titanic', 'PR2390',10,12,7);
-INSERT INTO ship VALUES (8, 'private', 'Scenic', 'QR5479',8,10,4);
-INSERT INTO ship VALUES (9, 'private', 'Paul Gauguin', 'MG5994',7,12,7);
-INSERT INTO ship VALUES (10, 'merchant', 'Oceania', 'LY6748',12,15,10);
+
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'merchant', 'Silversea', 'KJ5678',8,15,1.1);
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'merchant', 'Seabourn', 'TK9824',8,18,5.0);
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'private', 'Viking Ocean', 'SJ2308',4,6,1.0);
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'merchant', 'Windstar', 'AB5296',14,15,1.0);
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'private', 'Amadeus', 'DN28914',4,8,1.0);
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'private', 'Hurtigruten', 'MR0043',5,10,4.0);
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'merchant', 'Titanic', 'PR2390',10,12,7.0);
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'private', 'Scenic', 'QR5479',8,10,4.0);
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'private', 'Paul Gauguin', 'MG5994',7,12,7.0);
+INSERT INTO ship VALUES (nextval('shipIdSeq'), 'merchant', 'Oceania', 'LY6748',12,15,1.0);
 
 INSERT INTO employee VALUES (38484435414, 10000, 'Eric', 'Barton','supervisor');
 INSERT INTO employee VALUES (40358609500, 10001, 'Nicole', 'Griffin','financial advisor');
@@ -87,21 +93,30 @@ INSERT INTO employee VALUES (97112906016, 10007, 'Michael', 'Reynolds','public s
 INSERT INTO employee VALUES (30887826776, 10008, 'John', 'Williams','security officer');
 INSERT INTO employee VALUES (98745849442, 10009, 'Sarah', 'Lang','assistant manager');
 
-
 -- 8-9, 6mden uzun private tekneler ve birer tane belgesi olan murettebata sahipler.
 -- 1-2-4-7-10 merchant tekneler onlarin da en az bir tane murettebatı var.
-INSERT INTO crew VALUES (93941898898, 1,TRUE);
-INSERT INTO crew VALUES (59471527684, 2,TRUE);
-INSERT INTO crew VALUES (63524385602, 4,TRUE);
-INSERT INTO crew VALUES (12538759268, 4,FALSE);
-INSERT INTO crew VALUES (68290710092, 7,TRUE);
-INSERT INTO crew VALUES (84124748222, 10,FALSE);
-INSERT INTO crew VALUES (39970407076, 10,TRUE);
-INSERT INTO crew VALUES (38415791626, 1,FALSE);
-INSERT INTO crew VALUES (12657239498, 8,TRUE);
-INSERT INTO crew VALUES (97381976864, 9,TRUE);
 
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('91653654058', 'Lurline', 'Harker', 57, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('28968473514', 'Parrnell', 'Denver', 89, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('27478030959', 'Zacharie', 'Hugnot', 58, true);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('17168473679', 'Damara', 'Hadlow', 72, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('45049542164', 'Merrie', 'Archell', 83, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('58999065294', 'Braden', 'Walcar', 48, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('66322126673', 'Fannie', 'Skin', 28, true);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('15421050898', 'Bearnard', 'Keppel', 21, true);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('86627201433', 'Gwenny', 'Ranahan', 60, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('03964312266', 'Ambrosi', 'Jorczyk', 99, true);
 
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 91653654058, 1);
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 28968473514, 2);
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 27478030959, 4);
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 17168473679, 4);
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 45049542164, 7);
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 58999065294, 10);
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 66322126673, 10);
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 15421050898, 1);
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 86627201433, 8);
+INSERT INTO crew VALUES (nextval('shipWorkerIdSeq'), 03964312266, 9);
 
 INSERT INTO ship_owner VALUES (37683052026,  'Valerie', 'Thompson','Marketing Harmony',43);
 INSERT INTO ship_owner VALUES (86439117908,  'Jason', 'Jackson','InStyle',28);
@@ -114,11 +129,10 @@ INSERT INTO ship_owner VALUES (44790676700,  'Miranda', 'Taylor','Terra Trade',4
 INSERT INTO ship_owner VALUES (17260834450,  'Melissa', 'Hart','Lantern Transportation',53);
 INSERT INTO ship_owner VALUES (28544257490,  'Randall', 'Hampton','InnerCity Communication',22);
 
-
 --sadece public servant (devlet memuru) olan calisanlar tarafından lisans alabilirler
 --citizenID uzerinden ship ownerlarla baglı
 -- lisenced by uzerinden employeelerle baglı
---ay gun yıl 
+--ay gun yıl
 INSERT INTO owner_ship VALUES (1,37683052026,'07-01-2022',10002);
 INSERT INTO owner_ship VALUES (2,64158485102,'08-01-2022',10004);
 INSERT INTO owner_ship VALUES (3,69121788372,'09-01-2022',10007);
