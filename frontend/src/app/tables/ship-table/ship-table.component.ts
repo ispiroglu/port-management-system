@@ -21,6 +21,14 @@ export class ShipTableComponent implements OnInit {
 
     ngOnInit() {
         this.initForm();
+        this.dataService.get<any>('localhost:3000/ship/getAll')
+        .subscribe((response) =>{
+            console.log(32);
+        }, (error) => {
+            console.log(31);
+            console.error(error);
+            
+        });
     }
 
     onSubmit() {

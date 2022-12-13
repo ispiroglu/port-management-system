@@ -1,8 +1,10 @@
 const client = require('../pool').pool;
 
 const getAll = async (request, response) => {
+    console.log(request);
     var query = 'select * from ship'
     console.log('Query: select * from ship');
+    console.log(client);
     try {
         await client.query(query, (error, results) => {
             if(error) {
@@ -17,7 +19,7 @@ const getAll = async (request, response) => {
 }
 
 const getFiltered = async (request, response) => {
-
+    //request.params
 }
 
 module.exports = {
