@@ -1,5 +1,4 @@
 const Pool = require('pg').Pool;
-require('dotenv').config({ path: './database-credentials/credentials.env' });
 
 const pool = new Pool({
     user: process.env.DB_USER,
