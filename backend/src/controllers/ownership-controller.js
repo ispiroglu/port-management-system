@@ -1,23 +1,25 @@
-const client = require('../pool').pool;
+const db = require('../database/db-operations');
 
 const getAll = async (request, response) => {
-    var query = 'select * from owner_ship'
-    console.log('Query: select * from owner_ship');
     try {
-        await client.query(query, (error, results) => {
-            if(error) {
-                throw error;
-            }
-            response.status(200).json(results.rows);
-        })
-    } catch (exception) {
-        console.log(exception);
-        response.status(400).json(exception);
+        var queryResult = await db.getAll('owner_ship');
+        console.log(queryResult);
+        response.status(200).json(queryResult);
+    } catch (error) {
+        console.error(error);
+        response.status(400).json(error);
     }
 }
 
 const getFiltered = async (request, response) => {
-    
+    try{
+        var queryResult = await db.getFiltered('owner_ship', request.query);
+        console.log(queryResult);
+        response.status(200).json(queryResult);
+    } catch (error) {
+        console.log(error);
+        response.status(400).json(error);
+    }
 }
 
 module.exports = {
