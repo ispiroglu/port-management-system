@@ -1,16 +1,16 @@
 export class ShipModel {
     constructor(
-      public id: number,
-      public shipType: ShipType,
-      public name: string,
-      public licensePlate: string,
-      public length: number,
-      public motorPower: number,
-      public taxRate: number
+      public shipid: number,
+      public shiptype: ShipType,
+      public shipname: string,
+      public licenseplate: string,
+      public shiplength: number,
+      public motorpower: number,
+      public taxrate: number
     ) {}
 }
 
 export enum ShipType {
     Private,
-    Cargo
+    Merchant
 }

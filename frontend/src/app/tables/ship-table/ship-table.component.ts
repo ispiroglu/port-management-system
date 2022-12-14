@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ShipModel, ShipType} from "../../shared/models/ship.model";
 import {DataService} from "../../shared/service/http/data.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-ship-table',
@@ -16,23 +17,19 @@ export class ShipTableComponent implements OnInit {
     ]
     queryForm: FormGroup;
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService, private httpClient: HttpClient) {
     }
 
     ngOnInit() {
         this.initForm();
-        this.dataService.get<any>('localhost:3000/ship/getAll')
-        .subscribe((response) =>{
-            console.log(32);
-        }, (error) => {
-            console.log(31);
-            console.error(error);
-            
-        });
+        this.dataService.get<ShipModel[]>('http://localhost:3000/ship/getAll')
+            .subscribe((response) =>{
+                this.shipList = response.body;
+                console.log(this.shipList)
+            });
     }
-
     onSubmit() {
-        console.log(this.queryForm.value);
+
     }
 
     private initForm() {
