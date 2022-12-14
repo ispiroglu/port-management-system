@@ -1,7 +1,7 @@
 const client = require('../pool').pool;
 const generator = require('../util/query-generator');
 
-const getAll = async (request, response) => {
+const getAllShips = async (request, response) => {
     console.log(request);
     var query = 'select * from ship'
     console.log('Query: select * from ship');
@@ -36,6 +36,6 @@ const getFiltered = async (request, response) => {
 }
 
 module.exports = {
-    getAll,
+    getAll: getAllShips,
     getFiltered
 }
