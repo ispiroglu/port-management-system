@@ -1,4 +1,5 @@
 const client = require('../pool').pool;
+const generator = require('../util/query-generator');
 
 const getAll = async (request, response) => {
     console.log(request);
@@ -19,7 +20,19 @@ const getAll = async (request, response) => {
 }
 
 const getFiltered = async (request, response) => {
-    //request.params
+    var query = generator.selectWhere('ship', request.query);
+    console.log(query);
+    try {
+        await client.query(query, Object.values(request.query), (error, results) => {
+            if(error) {
+                throw error;
+            }
+            response.status(200).json(results.rows);
+        })
+    } catch (exception) {
+        console.log(exception);
+        response.status(400).json(exception);
+    }
 }
 
 module.exports = {
