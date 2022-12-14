@@ -5,7 +5,7 @@ const port = 3000;
 const ship = require('./src/controllers/ship-controller');
 
 app.get('/ship/getAll', ship.getAll);
-app.get('/ship/filter', ship.getFiltered);
+app.get('/ship/getFiltered', ship.getFiltered);
 
 app.listen(port, () => {
     console.log('Listening at port ' + port);
