@@ -1,4 +1,5 @@
 const client = require('../pool').pool;
+const { log } = require('console');
 const generator = require('../util/query-generator');
 
 const getAllShips = async (request, response) => {
@@ -21,13 +22,21 @@ const getAllShips = async (request, response) => {
 
 const getFiltered = async (request, response) => {
     var query = generator.selectWhere('ship', request.query);
-    console.log(query);
     try {
         await client.query(query, Object.values(request.query), (error, results) => {
             if(error) {
                 throw error;
             }
-            response.status(200).json(results.rows);
+            for(var i = 0; i < Object.values(request.query).length; i++) {
+                var st = '$' + (i+1);
+                query = query.split(st).join(Object.values(request.query)[i]);
+            }
+            console.log(query);
+            var res = {
+                query: query,
+                rows: results.rows
+            }
+            response.status(200).json(res);
         })
     } catch (exception) {
         console.log(exception);
