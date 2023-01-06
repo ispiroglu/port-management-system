@@ -17,9 +17,13 @@ export class OwnershipTableComponent implements OnInit {
     this.initForm();
   }
 
-  onSubmit() {
-    console.log(this.queryForm.value);
-  }
+  onSubmit() {}
+
+  onClickAdd() {}
+
+  onClickUpdate() {}
+
+  onClickDelete() {}
 
   private initForm() {
     this.queryForm = new FormGroup({
