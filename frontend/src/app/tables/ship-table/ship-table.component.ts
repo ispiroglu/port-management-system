@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ShipModel, ShipType } from "../../shared/models/ship.model";
 import { DataService } from "../../shared/service/http/data.service";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-ship-table",
@@ -15,7 +16,10 @@ export class ShipTableComponent implements OnInit {
   latestQuery: string;
   queryForm: FormGroup;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private toastr: ToastrService
+  ) {}
 
   // TODO: handle errors
   ngOnInit() {
@@ -24,13 +28,16 @@ export class ShipTableComponent implements OnInit {
       (response) => {
         this.shipList = response.body.rows;
         this.latestQuery = response.body.query;
-        console.log(this.shipList);
       },
-      (error) => {}
+      (error) => {
+        this.toastr.error(error.error);
+      }
     );
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.toastr.error("Ğ");
+  }
 
   onClickAdd() {}
 
@@ -40,13 +47,13 @@ export class ShipTableComponent implements OnInit {
 
   private initForm() {
     this.queryForm = new FormGroup({
-      id: new FormControl(null),
-      shipName: new FormControl(null),
-      shipType: new FormControl(null),
-      licensePlate: new FormControl(null),
-      length: new FormControl(null),
-      motorPower: new FormControl(null),
-      taxRate: new FormControl(null),
+      id: new FormControl(null, [Validators.required]),
+      shipName: new FormControl(null, [Validators.required]),
+      shipType: new FormControl(null, [Validators.required]),
+      licensePlate: new FormControl(null, [Validators.required]),
+      length: new FormControl(null, [Validators.required]),
+      motorPower: new FormControl(null, [Validators.required]),
+      taxRate: new FormControl(null, [Validators.required]),
     });
   }
 }

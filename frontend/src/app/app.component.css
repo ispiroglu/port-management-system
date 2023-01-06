@@ -1,3 +1,9 @@
 .img-responsive {
     max-width: 20%;
 }
+#toast-container > div {
+    opacity:1;
+}
+input.ng-invalid.ng-touched {
+    border: red 1px solid;
+}
