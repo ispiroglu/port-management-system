@@ -1,11 +1,15 @@
 require('dotenv').config({ path: '../sql/credentials.env' });
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 const cors = require('cors');
 app.use(cors({
     origin: '*'
 }));
+
+app.use(bodyParser.json());
+
 const crew = require('./src/controllers/crew-controller');
 const employee = require('./src/controllers/employee-controller');
 const member = require('./src/controllers/member-controller');
@@ -30,6 +34,9 @@ app.get('/ownership/getFiltered', ownership.getFiltered);
 
 app.get('/ship/getAll', ship.getAll);
 app.get('/ship/getFiltered', ship.getFiltered);
+app.post('/ship/insert', ship.insert);
+app.delete('/ship/delete', ship.deletes);
+app.put('/ship/update', ship.update);
 
 
 app.listen(port, () => {

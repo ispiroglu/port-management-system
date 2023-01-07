@@ -22,7 +22,43 @@ const getFiltered = async (request, response) => {
     }
 }
 
+const insert = async (request, response) => {
+    try {
+        var queryResult = await db.insert('ship', request.body);
+        console.log(queryResult);
+        response.status(200).json(queryResult);
+    } catch (error) {
+        console.log(error);
+        response.status(400).json(error);
+    }
+}
+
+const deletes = async (request, response) => {
+    try {
+        var queryResult = await db.deletes('ship', request.body);
+        console.log(queryResult);
+        response.status(200).json(queryResult);
+    } catch (error) {
+        console.log(error);
+        response.status(400).json(error);
+    }
+}
+
+const update = async (request, response) => {
+    try {
+        var queryResult = await db.update('ship', request.body);
+        console.log(queryResult);
+        response.status(200).json(queryResult);
+    } catch (error) {
+        console.log(error);
+        response.status(400).json(error);
+    }
+}
+
 module.exports = {
     getAll,
-    getFiltered
+    getFiltered,
+    insert,
+    deletes,
+    update
 }
