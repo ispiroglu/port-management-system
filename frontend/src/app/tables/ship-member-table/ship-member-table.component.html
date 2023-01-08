@@ -51,30 +51,38 @@
                     <div class="card-body">
                         <form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
                             <div class="row">
-                            <div class="input-group col-md-4">
-                                <span class="input-group-text" >CitizenId</span>
-                                <textarea class="form-control"  formControlName="citizenId"></textarea>
+                                <div class="input-group col-md-4">
+                                    <span class="input-group-text">CitizenId</span>
+                                    <input type="number" class="form-control" formControlName="citizenId">
+                                </div>
+                                <div class="input-group col-md-4">
+                                    <span class="input-group-text">Name</span>
+                                    <input type="text" class="form-control" formControlName="name">
+                                </div>
+                                <div class="input-group col-md-4">
+                                    <span class="input-group-text">Surname</span>
+                                    <input type="text" class="form-control" formControlName="surname">
+                                </div>
                             </div>
-                            <div class="input-group col-md-4">
-                                <span class="input-group-text" >Name</span>
-                                <textarea class="form-control" formControlName="name"></textarea>
-                            </div>
-                            <div class="input-group col-md-4">
-                                <span class="input-group-text" >Surname</span>
-                                <textarea class="form-control" formControlName="surname"></textarea>
-                            </div>
-                        </div>
                             <div class="row">
                                 <div class="input-group col-md-9">
-                                    <span class="input-group-text" >Age</span>
-                                    <textarea class="form-control"  formControlName="age"></textarea>
-                                </div>
-                                <div class="input-group col-md-3">
-                                    <span class="input-group-text" >Has License</span>
-                                    <input type="checkbox" class=" form-control form-check-input" formControlName="hasLicense" />
+                                    <span class="input-group-text">Age</span>
+                                    <input type="number" class="form-control" formControlName="age">
+                                    <div class="input-group col-md-3">
+                                        <span class="input-group-text">Has License</span>
+                                        <input type="checkbox" class=" form-control form-check-input"
+                                               formControlName="hasLicense"/>
+                                    </div>
                                 </div>
                             </div>
-                            <button class="btn btn-success" type="submit" style="float: right">SUBMIT</button>
+                            <div class="row grid justify-content-end">
+                                <button class="btn btn-success" type="button" (click)="onClickAdd()">Add</button>
+                                <button class="btn btn-warning" type="button" (click)="onClickUpdate()">Update
+                                </button>
+                                <button class="btn btn-danger" type="button" (click)="onClickDelete()">Delete
+                                </button>
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
                         </form>
                     </div>
                 </div>

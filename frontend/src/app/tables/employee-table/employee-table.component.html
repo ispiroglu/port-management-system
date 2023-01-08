@@ -53,28 +53,33 @@
                             <div class="row">
                             <div class="input-group col-md-4">
                                 <span class="input-group-text" >Employee Id</span>
-                                <textarea class="form-control" formControlName="employeeId"></textarea>
+                                <input type="number" class="form-control" formControlName="employeeId">
                             </div>
                             <div class="input-group col-md-4">
                                 <span class="input-group-text" >Citizen Id</span>
-                                <textarea class="form-control"  formControlName="citizenId"></textarea>
+                                <input type="number" class="form-control"  formControlName="citizenId">
                             </div>
                             <div class="input-group col-md-4">
                                 <span class="input-group-text" >Name</span>
-                                <textarea class="form-control"  formControlName="name"></textarea>
+                                <input type="text" class="form-control"  formControlName="name">
                             </div>
                         </div>
                             <div class="row">
                                 <div class="input-group col-md-6">
                                     <span class="input-group-text" >Surname</span>
-                                    <textarea class="form-control" formControlName="surname"></textarea>
+                                    <input type="text" class="form-control" formControlName="surname">
                                 </div>
                                 <div class="input-group col-md-6">
                                     <span class="input-group-text" >Position</span>
-                                    <textarea class="form-control" formControlName="position"></textarea>
+                                    <input type="text" class="form-control" formControlName="position">
                                 </div>
                             </div>
-                            <button class="btn btn-success" type="submit" style="float: right">SUBMIT</button>
+                            <div class="row grid justify-content-end">
+                                <button class="btn btn-success" type="button" (click)="onClickAdd()">Add</button>
+                                <button class="btn btn-warning" type="button" (click)="onClickUpdate()">Update</button>
+                                <button class="btn btn-danger" type="button" (click)="onClickDelete()">Delete</button>
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
                         </form>
                     </div>
                 </div>

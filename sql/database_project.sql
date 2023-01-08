@@ -8,8 +8,8 @@ drop table if exists ship cascade ;
 CREATE TABLE ship (
   shipId numeric,
   shipType varchar(15) not null,
-  shipName varchar(15),
-  licensePlate varchar(10),
+  shipName varchar(15) not null,
+  licensePlate varchar(10) not null,
   shipLength numeric(2) not null,
   motorPower numeric(2) not null,
   taxRate numeric(2,1) not null,
