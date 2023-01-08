@@ -19,25 +19,39 @@ const ship = require('./src/controllers/ship-controller');
 
 app.get('/crew/getAll', crew.getAll);
 app.get('/crew/getFiltered', crew.getFiltered);
+app.post('/crew/insert', crew.insert);
+app.delete('/crew/delete', crew.deletes);
+app.put('/crew/update', crew.update);
 
 app.get('/employee/getAll', employee.getAll);
 app.get('/employee/getFiltered', employee.getFiltered);
+app.post('/employee/insert', employee.insert);
+app.delete('/employee/delete', employee.deletes);
+app.put('/employee/update', employee.update);
 
 app.get('/member/getAll', member.getAll);
 app.get('/member/getFiltered', member.getFiltered);
+app.post('/member/insert', member.insert);
+app.delete('/member/delete', member.deletes);
+app.put('/member/update', member.update);
 
 app.get('/owner/getAll', owner.getAll);
-app.get('/owner/getFiltered', owner.getFiltered);
+app.get('/owner/getFiltered', oower.getFiltered);
+app.post('/owner/insert', owner.insert);
+app.delete('/owner/delete', owner.deletes);
+app.put('/owner/update', owner.update);
 
 app.get('/ownership/getAll', ownership.getAll);
 app.get('/ownership/getFiltered', ownership.getFiltered);
+app.post('/ownership/insert', ownership.insert);
+app.delete('/ownership/delete', ownership.deletes);
+app.put('/ownership/update', ownership.update);
 
 app.get('/ship/getAll', ship.getAll);
 app.get('/ship/getFiltered', ship.getFiltered);
 app.post('/ship/insert', ship.insert);
 app.delete('/ship/delete', ship.deletes);
 app.put('/ship/update', ship.update);
-
 
 app.listen(port, () => {
     console.log('Listening at port ' + port);
