@@ -36,7 +36,7 @@ app.delete('/member/delete', member.deletes);
 app.put('/member/update', member.update);
 
 app.get('/owner/getAll', owner.getAll);
-app.get('/owner/getFiltered', oower.getFiltered);
+app.get('/owner/getFiltered', owner.getFiltered);
 app.post('/owner/insert', owner.insert);
 app.delete('/owner/delete', owner.deletes);
 app.put('/owner/update', owner.update);
