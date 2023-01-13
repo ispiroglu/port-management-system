@@ -119,8 +119,10 @@ RETURNS TRIGGER AS $$
     BEGIN
         IF (new.shipLength > 10) THEN
             new.taxRate := 40;
+            RETURN NEW;
         ELSE
             new.taxRate := 0;
+            RETURN NEW;
         END IF;
     END;
 $$  LANGUAGE 'plpgsql';
