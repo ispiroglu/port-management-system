@@ -1,9 +1,9 @@
 export class EmployeeModel {
-    constructor(
-        public employeeId: number,
-        public citizenId: number,
-        public name: string,
-        public surname: string,
-        public position: string
-    ) {}
+  constructor(
+    public employeeid: number,
+    public citizenid: number,
+    public fname: string,
+    public lname: string,
+    public position: string
+  ) {}
 }

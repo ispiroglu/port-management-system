@@ -44,14 +44,17 @@ export class OwnershipTableComponent implements OnInit {
   }
 
   private initTable() {
-    this.dataService.get<any>("http://localhost:3000/member/getAll").subscribe(
-      (response) => {
-        this.ownershipList = response.body.rows;
-        this.latestQuery = response.body.query;
-      },
-      (error) => {
-        this.toastr.error(error.error);
-      }
-    );
+    this.dataService
+      .get<any>("http://localhost:3000/ownership/getAll")
+      .subscribe(
+        (response) => {
+          console.log(response.body);
+          this.ownershipList = response.body.rows;
+          this.latestQuery = response.body.query;
+        },
+        (error) => {
+          this.toastr.error(error.error);
+        }
+      );
   }
 }

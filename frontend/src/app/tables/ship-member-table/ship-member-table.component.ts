@@ -48,6 +48,7 @@ export class ShipMemberTableComponent implements OnInit {
   private initTable() {
     this.dataService.get<any>("http://localhost:3000/member/getAll").subscribe(
       (response) => {
+        console.log(response.body);
         this.shipMemberList = response.body.rows;
         this.latestQuery = response.body.query;
       },
