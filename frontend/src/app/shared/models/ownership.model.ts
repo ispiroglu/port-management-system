@@ -1,8 +1,8 @@
 export class OwnershipModel {
-    constructor(
-        public shipId: number,
-        public citizenId: number,
-        public licensedAt: string,
-        public licensedBy: number,
-    ) {}
+  constructor(
+    public shipid: number,
+    public citizenid: number,
+    public licensedat: string,
+    public licensedby: number
+  ) {}
 }

@@ -5,7 +5,8 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title ">Ownership Table</h4>
-                        <p class="card-category"> List of all ownerships</p>
+                        <p class="card-category"> This table is result of this query:</p>
+                        <p class="card-category"> {{ latestQuery }}</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -15,7 +16,7 @@
                                     ShipId
                                 </th>
                                 <th>
-                                CitizenID
+                                    CitizenID
                                 </th>
                                 <th>
                                     Licensed At
@@ -26,10 +27,10 @@
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let ownership of ownershipList ">
-                                    <td>{{ ownership.shipId }}</td>
-                                    <td>{{ ownership.citizenId }}</td>
-                                    <td>{{ ownership.licensedAt }}</td>
-                                    <td>{{ ownership.licensedBy }}</td>
+                                    <td>{{ ownership.shipid }}</td>
+                                    <td>{{ ownership.citizenid }}</td>
+                                    <td>{{ ownership.licensedat }}</td>
+                                    <td>{{ ownership.licensedby }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -48,23 +49,23 @@
                 <div class="card-body">
                     <form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
                         <div class="row">
-                        <div class="input-group col-md-3">
-                            <span class="input-group-text" >Ship Id</span>
-                            <input type="number" class="form-control" formControlName="shipId">
+                            <div class="input-group col-md-3">
+                                <span class="input-group-text">Ship Id</span>
+                                <input type="number" class="form-control" formControlName="shipId">
+                            </div>
+                            <div class="input-group col-md-3">
+                                <span class="input-group-text">CitizenId</span>
+                                <input type="number" class="form-control" formControlName="citizenId">
+                            </div>
+                            <div class="input-group col-md-3">
+                                <span class="input-group-text">Licensed At</span>
+                                <input type="datetime-local" class="form-control" formControlName="licensedAt">
+                            </div>
+                            <div class="input-group col-md-3">
+                                <span class="input-group-text">LicensedBy</span>
+                                <input type="number" class="form-control" formControlName="licensedBy">
+                            </div>
                         </div>
-                        <div class="input-group col-md-3">
-                            <span class="input-group-text" >CitizenId</span>
-                            <input type="number" class="form-control"  formControlName="citizenId">
-                        </div>
-                        <div class="input-group col-md-3">
-                            <span class="input-group-text" >Licensed At</span>
-                            <input type="datetime-local" class="form-control"  formControlName="licensedAt">
-                        </div>
-                        <div class="input-group col-md-3">
-                            <span class="input-group-text" >LicensedBy</span>
-                            <input type="number" class="form-control" formControlName="licensedBy">
-                        </div>
-                    </div>
                         <div class="row grid justify-content-end">
                             <button class="btn btn-success" type="button" (click)="onClickAdd()">Add</button>
                             <button class="btn btn-warning" type="button" (click)="onClickUpdate()">Update</button>
@@ -77,6 +78,4 @@
         </div>
     </div>
 </div>
-
-<app-dashboard></app-dashboard>
 

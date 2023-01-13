@@ -5,7 +5,8 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title ">Crew Table</h4>
-                        <p class="card-category"> List of all crews</p>
+                        <p class="card-category"> This table is result of this query:</p>
+                        <p class="card-category"> {{ latestQuery }}</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -24,8 +25,8 @@
                                 <tbody>
                                 <tr *ngFor="let crew of crewList ">
                                     <td>{{ crew.id }}</td>
-                                    <td>{{ crew.citizenId }}</td>
-                                    <td>{{ crew.shipId }}</td>
+                                    <td>{{ crew.citizenid }}</td>
+                                    <td>{{ crew.shipid }}</td>
                                 </tr>
                                 </tbody>
                             </table>

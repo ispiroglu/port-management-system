@@ -16,17 +16,17 @@ UPDATE ship_worker SET age = 28 WHERE citizenid=3964312266;
 --INSERT INTO ship_worker (citizenId, fname, lname, age, has_license) values ('91653654058', 'Lurline', 'Harker', 57, false);
 
 --6. Arayüzden çağrılan sorgulardan en az biri “view” olarak tanımlanmış olmalıdır.
-create view peopleWhoHavePrivateShip
+create view private_ship_owners
 as 
 select ship_owner.fname, ship_owner.lname
 from ship_owner,ship, owner_ship
 where ship.shiptype='private' and ship_owner.citizenid=owner_ship.citizenid and ship.shipid=owner_ship.shipId
 
 select * 
-from peopleWhoHavePrivateShip
+from private_ship_owners
 
 --8 Union Except Intersect
---50 yasindan buyuk  VE ticari gemide calisan personellerin isim soyisim bilgileri
+--50 yasindan buyuk VE ticari gemide calisan personellerin isim soyisim bilgileri
 select fname, lname
 from ship_worker
 where age > 50
@@ -109,12 +109,12 @@ select numOfShipsEnteredSpesifications(10,8)
 --çalıştığına dair arayüze bilgilendirme mesajı döndürülmelidir.
 
 --liman baskanliginda sadece mesai saatlerinde lisans verilmesine izin veren trigger
-CREATE TRIGGER licansingTrigger
+CREATE TRIGGER licensingTrigger
 BEFORE INSERT or UPDATE
 on owner_ship
-FOR EACH ROW EXECUTE PROCEDURE licansingTriggerFunc();
+FOR EACH ROW EXECUTE PROCEDURE licensingTriggerFunc();
 
-CREATE FUNCTION licansingTriggerFunc() 
+CREATE FUNCTION licensingTriggerFunc()
 RETURNS TRIGGER AS $$
 BEGIN
 IF ( to_char(now(), 'DY') in ('SAT', 'SUN') OR to_char(now(), 'HH24') not between '09' and '17') THEN 

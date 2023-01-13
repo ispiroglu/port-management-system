@@ -1,9 +1,9 @@
 export class ShipMemberModel {
-    constructor(
-        public citizenId: number,
-        public name: string,
-        public surname: string,
-        public age: number,
-        public hasLicense: boolean
-    ) {}
+  constructor(
+    public citizenid: number,
+    public fname: string,
+    public lname: string,
+    public age: number,
+    public has_license: boolean
+  ) {}
 }

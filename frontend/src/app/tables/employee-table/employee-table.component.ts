@@ -45,14 +45,16 @@ export class EmployeeTableComponent implements OnInit {
   }
 
   private initTable() {
-    this.dataService.get<any>("http://localhost:3000/member/getAll").subscribe(
-      (response) => {
-        this.employeeList = response.body.rows;
-        this.latestQuery = response.body.query;
-      },
-      (error) => {
-        this.toastr.error(error.error);
-      }
-    );
+    this.dataService
+      .get<any>("http://localhost:3000/employee/getAll")
+      .subscribe(
+        (response) => {
+          this.employeeList = response.body.rows;
+          this.latestQuery = response.body.query;
+        },
+        (error) => {
+          this.toastr.error(error.error);
+        }
+      );
   }
 }

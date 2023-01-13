@@ -5,7 +5,8 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title ">Member Table</h4>
-                        <p class="card-category"> List of all ship members</p>
+                        <p class="card-category"> This table is result of this query:</p>
+                        <p class="card-category"> {{ latestQuery }}</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -29,11 +30,11 @@
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let member of shipMemberList ">
-                                    <td>{{ member.citizenId }}</td>
-                                    <td>{{ member.name }}</td>
-                                    <td>{{ member.surname }}</td>
+                                    <td>{{ member.citizenid }}</td>
+                                    <td>{{ member.fname }}</td>
+                                    <td>{{ member.lname }}</td>
                                     <td>{{ member.age }}</td>
-                                    <td>{{ member.hasLicense }}</td>
+                                    <td>{{ member.has_license }}</td>
                                 </tr>
                                 </tbody>
                             </table>
