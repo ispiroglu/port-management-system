@@ -63,6 +63,77 @@ CREATE TABLE crew(
     foreign key (shipId) references ship(shipId)
 );
 
+create view private_ship_owners
+as
+select ship_owner.fname, ship_owner.lname
+from ship_owner,ship, owner_ship
+where ship.shiptype='private' and ship_owner.citizenid=owner_ship.citizenid and ship.shipid=owner_ship.shipId;
+
+-- AVG Ship worker age by ship type
+CREATE OR REPLACE FUNCTION avg_age(typeofship varchar) RETURNS integer as'
+DECLARE
+	averageAge integer;
+BEGIN
+	SELECT AVG(ship_worker.age) INTO averageAge
+	FROM ship_worker,crew,ship
+	WHERE ship_worker.citizenid = crew.citizenid and crew.shipid=ship.shipid and ship.shiptype=typeofship;
+
+	RETURN averageAge;
+END;
+'LANGUAGE plpgsql;
+
+-- Filter Ships by Motor Power and Length
+CREATE OR REPLACE FUNCTION num_of_filtered_ships_by_power_and_length(powerOfMotor numeric,lengthOfShip numeric) RETURNS integer as'
+DECLARE
+	num integer;
+BEGIN
+	SELECT count(*) INTO num
+	FROM ship
+	WHERE ship.motorpower>powerOfMotor and ship.shiplength>lengthOfShip;
+	RETURN num;
+END;
+'LANGUAGE plpgsql;
+
+
+-- Trigger that controls is transaction time in shift hours.
+CREATE FUNCTION licensing_trigger_func()
+RETURNS TRIGGER AS $$
+BEGIN
+IF ( to_char(now(), 'DY') in ('SAT', 'SUN') OR to_char(now(), 'HH24') not between '09' and '17') THEN
+RAISE EXCEPTION 'You can give license only at work days/hours' ;
+RETURN null;
+ELSE
+	RETURN new;
+END IF;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER licensing_trigger
+BEFORE INSERT or UPDATE
+on owner_ship
+FOR EACH ROW EXECUTE PROCEDURE licensing_trigger_func();
+
+
+CREATE FUNCTION taxrate_insert_trigger_func()
+RETURNS TRIGGER AS $$
+    BEGIN
+        IF (new.shipLength > 10) THEN
+            new.taxRate := 40;
+        ELSE
+            new.taxRate := 0;
+        END IF;
+    END;
+$$  LANGUAGE 'plpgsql';
+
+CREATE TRIGGER taxrate_insert_trigger
+BEFORE INSERT or UPDATE
+on ship
+FOR ROW EXECUTE PROCEDURE taxrate_Insert_trigger_func();
+
+
+
+
+
 select * from ship;
 select * from ship_owner;
 select * from employee;
