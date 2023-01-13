@@ -12,7 +12,7 @@ CREATE TABLE ship (
   licensePlate varchar(10) not null,
   shipLength numeric(2) not null,
   motorPower numeric(2) not null,
-  taxRate numeric(2,1) not null,
+  taxRate numeric(3,1) not null,
   primary key(shipId)
 );
 drop table if exists ship_owner cascade ;
