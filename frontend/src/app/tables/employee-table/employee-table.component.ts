@@ -10,6 +10,7 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./employee-table.component.css"],
 })
 export class EmployeeTableComponent implements OnInit {
+  domain: string = "employee";
   employeeList: EmployeeModel[] = [
     new EmployeeModel(1, 3341152132, "Asude Merve", "Ekiz", "Lisans Memuru"),
   ];
@@ -26,20 +27,56 @@ export class EmployeeTableComponent implements OnInit {
     this.initTable();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.dataService.getFiltered(this.domain, this.queryForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        this.employeeList = response.body.rows;
+        this.latestQuery = response.body.query;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error);
+      }
+    );
+  }
 
-  onClickAdd() {}
+  onClickAdd() {
+    let val = this.queryForm.value;
+    val["employeeid"] = "nextval('employee_id_seq')";
+    console.log(val);
+    this.dataService
+      .createOnDomain(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+    this.initTable();
+  }
 
   onClickUpdate() {}
 
-  onClickDelete() {}
+  onClickDelete() {
+    this.dataService
+      .deleteByParams(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+  }
 
   private initForm() {
     this.queryForm = new FormGroup({
-      employeeId: new FormControl(null, [Validators.required]),
-      citizenId: new FormControl(null, [Validators.required]),
-      name: new FormControl(null, [Validators.required]),
-      surname: new FormControl(null, [Validators.required]),
+      employeeid: new FormControl(null, [Validators.required]),
+      citizenid: new FormControl(null, [Validators.required]),
+      fname: new FormControl(null, [Validators.required]),
+      lname: new FormControl(null, [Validators.required]),
       position: new FormControl(null, [Validators.required]),
     });
   }

@@ -10,6 +10,7 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./ship-owner-table.component.css"],
 })
 export class ShipOwnerTableComponent implements OnInit {
+  domain: string = "owner";
   shipOwnerList: ShipOwnerModel[] = [
     new ShipOwnerModel(3353343326, "Hasan", "Hüseyin", 55, "Kardeşler Kundura"),
   ];
@@ -26,19 +27,52 @@ export class ShipOwnerTableComponent implements OnInit {
     this.initTable();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.dataService.getFiltered(this.domain, this.queryForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        this.shipOwnerList = response.body.rows;
+        this.latestQuery = response.body.query;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error);
+      }
+    );
+  }
 
-  onClickAdd() {}
+  onClickAdd() {
+    this.dataService
+      .createOnDomain(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+    this.initTable();
+  }
 
   onClickUpdate() {}
 
-  onClickDelete() {}
+  onClickDelete() {
+    this.dataService
+      .deleteByParams(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+  }
 
   private initForm() {
     this.queryForm = new FormGroup({
-      citizenId: new FormControl(null, [Validators.required]),
-      name: new FormControl(null, [Validators.required]),
-      surname: new FormControl(null, [Validators.required]),
+      citizenid: new FormControl(null, [Validators.required]),
+      fname: new FormControl(null, [Validators.required]),
+      lname: new FormControl(null, [Validators.required]),
       age: new FormControl(null),
       company: new FormControl(null, [Validators.min(18)]),
     });

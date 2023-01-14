@@ -9,6 +9,7 @@ import { AppComponent } from "./app.component";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AlertComponent } from "./shared/alert/alert/alert.component";
 import { ToastrModule } from "ngx-toastr";
+import { ExtrasComponent } from "./tables/extras/extras.component";
 
 @NgModule({
   imports: [

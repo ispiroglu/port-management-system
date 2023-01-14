@@ -10,6 +10,7 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./ship-table.component.css"],
 })
 export class ShipTableComponent implements OnInit {
+  domain: string = "ship";
   shipList: ShipModel[] = [
     new ShipModel(1, ShipType.Private, "Ship Name", "34LICENSE34", 5, 10, 0),
   ];
@@ -24,6 +25,65 @@ export class ShipTableComponent implements OnInit {
   // TODO: handle errors
   ngOnInit() {
     this.initForm();
+    this.initTable();
+  }
+
+  onSubmit() {
+    this.dataService.getFiltered(this.domain, this.queryForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        this.shipList = response.body.rows;
+        this.latestQuery = response.body.query;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error);
+      }
+    );
+  }
+
+  onClickAdd() {
+    this.dataService
+      .createOnDomain(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+
+    this.toastr.info("Tax rate checker function has been triggered. ");
+    this.initTable();
+  }
+
+  onClickUpdate() {}
+
+  onClickDelete() {
+    this.dataService
+      .deleteByParams(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+  }
+
+  private initForm() {
+    this.queryForm = new FormGroup({
+      shipid: new FormControl(null, [Validators.required]),
+      shipname: new FormControl(null, [Validators.required]),
+      shiptype: new FormControl(null, [Validators.required]),
+      licenseplate: new FormControl(null, [Validators.required]),
+      length: new FormControl(null, [Validators.required]),
+      motorpower: new FormControl(null, [Validators.required]),
+      taxrate: new FormControl(null, [Validators.required]),
+    });
+  }
+
+  private initTable() {
     this.dataService.get<any>("http://localhost:3000/ship/getAll").subscribe(
       (response) => {
         this.shipList = response.body.rows;
@@ -33,27 +93,5 @@ export class ShipTableComponent implements OnInit {
         this.toastr.error(error.error);
       }
     );
-  }
-
-  onSubmit() {
-    this.toastr.error("Ğ");
-  }
-
-  onClickAdd() {}
-
-  onClickUpdate() {}
-
-  onClickDelete() {}
-
-  private initForm() {
-    this.queryForm = new FormGroup({
-      id: new FormControl(null, [Validators.required]),
-      shipName: new FormControl(null, [Validators.required]),
-      shipType: new FormControl(null, [Validators.required]),
-      licensePlate: new FormControl(null, [Validators.required]),
-      length: new FormControl(null, [Validators.required]),
-      motorPower: new FormControl(null, [Validators.required]),
-      taxRate: new FormControl(null, [Validators.required]),
-    });
   }
 }

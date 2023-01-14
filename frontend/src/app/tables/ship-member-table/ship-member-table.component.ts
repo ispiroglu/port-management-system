@@ -11,6 +11,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class ShipMemberTableComponent implements OnInit {
   // TODO: Boolean türlerin çıktısı tik olmalı
+  domain: string = "member";
   shipMemberList: ShipMemberModel[] = [
     new ShipMemberModel(11322322454, "Evren", "Ispiroglu", 20, true),
   ];
@@ -27,21 +28,54 @@ export class ShipMemberTableComponent implements OnInit {
     this.initTable();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.dataService.getFiltered(this.domain, this.queryForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        this.shipMemberList = response.body.rows;
+        this.latestQuery = response.body.query;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error);
+      }
+    );
+  }
 
-  onClickAdd() {}
+  onClickAdd() {
+    this.dataService
+      .createOnDomain(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+    this.initTable();
+  }
 
   onClickUpdate() {}
 
-  onClickDelete() {}
+  onClickDelete() {
+    this.dataService
+      .deleteByParams(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+  }
 
   private initForm() {
     this.queryForm = new FormGroup({
-      citizenId: new FormControl(null, [Validators.required]),
-      name: new FormControl(null, [Validators.required]),
-      surname: new FormControl(null, [Validators.required]),
+      citizenid: new FormControl(null, [Validators.required]),
+      fname: new FormControl(null, [Validators.required]),
+      lname: new FormControl(null, [Validators.required]),
       age: new FormControl(null, [Validators.required, Validators.min(18)]),
-      hasLicense: new FormControl(null),
+      has_license: new FormControl(null),
     });
   }
 
