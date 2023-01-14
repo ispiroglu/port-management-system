@@ -35,7 +35,7 @@ const insert = async (request, response) => {
 
 const deletes = async (request, response) => {
   try {
-    var queryResult = await db.deletes("ship_worker", request.body);
+    var queryResult = await db.deletes("ship_worker", request.query);
     console.log(queryResult);
     response.status(200).json(queryResult);
   } catch (error) {
