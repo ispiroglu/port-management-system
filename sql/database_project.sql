@@ -44,6 +44,8 @@ CREATE TABLE owner_ship(
 	licensedAt date not null,
 	licensedBy numeric not null,
 	primary key (shipId, citizenId),
+	foreign key (shipId) references ship(shipId),
+	foreign key (citizenId) references ship_owner(citizenId),
 	foreign key (licensedBy) references employee(employeeId)
 );
 
