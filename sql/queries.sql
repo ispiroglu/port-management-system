@@ -102,8 +102,37 @@ END;
 select numOfShipsEnteredSpesifications(10,8)
 --drop fonk numOfShipsEnteredSpesifications(numeric,numeric)
 
---Bu fonksiyonların en az birinde “record” ve “cursor”
---tanımı-kullanımı olmalıdır. (EKLENECEK)
+--girilen parametreye gore lisansı olan ya da olmayan gemi çalışanlarını listeleyen fonksiyon
+--record ve cursor kullanımı
+
+CREATE TYPE worker AS (citizenid numeric(11),fname varchar(15), lname varchar(15), has_license boolean);
+
+CREATE OR REPLACE FUNCTION workerWithLicense(hasLicense boolean)
+RETURNS worker[] AS'
+
+DECLARE
+shipWorkerCursor CURSOR FOR 
+SELECT citizenid, fname, lname,has_license
+FROM ship_worker
+WHERE hasLicense=has_license;
+licensedWorkers worker[];
+i integer;
+BEGIN
+	i := 1;
+	FOR worker IN shipWorkerCursor LOOP
+		IF worker.has_license=hasLicense THEN
+		licensedWorkers[i] = worker;
+		i := i + 1;
+	    END IF;
+	END LOOP;
+RETURN licensedWorkers;
+END;
+' LANGUAGE 'plpgsql';
+
+SELECT workerWithLicense(true);
+--SELECT workerWithLicense(false);
+
+--DROP FUNCTION workerWithLicense(boolean);
 
 --11. 2 adet trigger tanımlamalı ve arayüzden girilecek değerlerle tetiklemelisiniz. Trigger’ın
 --çalıştığına dair arayüze bilgilendirme mesajı döndürülmelidir.
