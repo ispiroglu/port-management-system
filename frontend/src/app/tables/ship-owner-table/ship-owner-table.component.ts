@@ -36,7 +36,7 @@ export class ShipOwnerTableComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.toastr.error(error.error);
+        this.toastr.error(error.error.detail);
       }
     );
   }
@@ -48,7 +48,7 @@ export class ShipOwnerTableComponent implements OnInit {
         (response) => {},
         (error) => {
           console.log(error);
-          this.toastr.error(error.error);
+          this.toastr.error(error.error.detail);
         }
       );
     this.initTable();
@@ -63,7 +63,7 @@ export class ShipOwnerTableComponent implements OnInit {
         (response) => {},
         (error) => {
           console.log(error);
-          this.toastr.error(error.error);
+          this.toastr.error(error.error.detail);
         }
       );
   }
@@ -85,7 +85,7 @@ export class ShipOwnerTableComponent implements OnInit {
         this.latestQuery = response.body.query;
       },
       (error) => {
-        this.toastr.error(error.error);
+        this.toastr.error(error.error.detail);
       }
     );
   }

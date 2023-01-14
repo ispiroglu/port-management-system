@@ -36,7 +36,7 @@ export class EmployeeTableComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.toastr.error(error.error);
+        this.toastr.error(error.error.detail);
       }
     );
   }
@@ -51,7 +51,7 @@ export class EmployeeTableComponent implements OnInit {
         (response) => {},
         (error) => {
           console.log(error);
-          this.toastr.error(error.error);
+          this.toastr.error(error.error.detail);
         }
       );
     this.initTable();
@@ -66,7 +66,7 @@ export class EmployeeTableComponent implements OnInit {
         (response) => {},
         (error) => {
           console.log(error);
-          this.toastr.error(error.error);
+          this.toastr.error(error.error.detail);
         }
       );
   }
@@ -90,7 +90,7 @@ export class EmployeeTableComponent implements OnInit {
           this.latestQuery = response.body.query;
         },
         (error) => {
-          this.toastr.error(error.error);
+          this.toastr.error(error.error.detail);
         }
       );
   }

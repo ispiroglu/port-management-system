@@ -22,7 +22,6 @@ export class ShipTableComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  // TODO: handle errors
   ngOnInit() {
     this.initForm();
     this.initTable();
@@ -36,8 +35,7 @@ export class ShipTableComponent implements OnInit {
         this.latestQuery = response.body.query;
       },
       (error) => {
-        console.log(error);
-        this.toastr.error(error.error);
+        this.toastr.error(error.error.detail);
       }
     );
   }
@@ -49,7 +47,7 @@ export class ShipTableComponent implements OnInit {
         (response) => {},
         (error) => {
           console.log(error);
-          this.toastr.error(error.error);
+          this.toastr.error(error.error.detail);
         }
       );
 
@@ -65,8 +63,7 @@ export class ShipTableComponent implements OnInit {
       .subscribe(
         (response) => {},
         (error) => {
-          console.log(error);
-          this.toastr.error(error.error);
+          this.toastr.error(error.error.detail);
         }
       );
   }
@@ -90,7 +87,7 @@ export class ShipTableComponent implements OnInit {
         this.latestQuery = response.body.query;
       },
       (error) => {
-        this.toastr.error(error.error);
+        this.toastr.error(error.error.detail);
       }
     );
   }

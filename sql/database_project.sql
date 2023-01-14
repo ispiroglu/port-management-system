@@ -116,7 +116,7 @@ BEFORE INSERT or UPDATE
 on owner_ship
 FOR EACH ROW EXECUTE PROCEDURE licensing_trigger_func();
 
-
+-- Trigger that controls taxrate
 CREATE FUNCTION taxrate_insert_trigger_func()
 RETURNS TRIGGER AS $$
     BEGIN
@@ -134,6 +134,32 @@ CREATE TRIGGER taxrate_insert_trigger
 BEFORE INSERT or UPDATE
 on ship
 FOR ROW EXECUTE PROCEDURE taxrate_Insert_trigger_func();
+
+
+--
+CREATE TYPE worker AS (citizenid numeric(11),fname varchar(15), lname varchar(15), has_license boolean);
+
+CREATE OR REPLACE FUNCTION workerWithLicense(hasLicense boolean)
+RETURNS worker[] AS'
+
+DECLARE
+shipWorkerCursor CURSOR FOR
+SELECT citizenid, fname, lname,has_license
+FROM ship_worker
+WHERE hasLicense=has_license;
+licensedWorkers worker[];
+i integer;
+BEGIN
+	i := 1;
+	FOR worker IN shipWorkerCursor LOOP
+		IF worker.has_license=hasLicense THEN
+		licensedWorkers[i] = worker;
+		i := i + 1;
+	    END IF;
+	END LOOP;
+RETURN licensedWorkers;
+END;
+' LANGUAGE 'plpgsql';
 
 
 select * from ship;

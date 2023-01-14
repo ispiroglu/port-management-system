@@ -34,7 +34,7 @@ export class CrewTableComponent {
       },
       (error) => {
         console.log(error);
-        this.toastr.error(error.error);
+        this.toastr.error(error.error.detail);
       }
     );
   }
@@ -45,7 +45,7 @@ export class CrewTableComponent {
         (response) => {},
         (error) => {
           console.log(error);
-          this.toastr.error(error.error);
+          this.toastr.error(error.error.detail);
         }
       );
     this.initTable();
@@ -59,7 +59,7 @@ export class CrewTableComponent {
         (response) => {},
         (error) => {
           console.log(error);
-          this.toastr.error(error.error);
+          this.toastr.error(error.error.detail);
         }
       );
   }
@@ -79,7 +79,7 @@ export class CrewTableComponent {
         this.latestQuery = response.body.query;
       },
       (error) => {
-        this.toastr.error(error.error);
+        this.toastr.error(error.error.detail);
       }
     );
   }
