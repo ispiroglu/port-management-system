@@ -51,12 +51,24 @@ export class OwnershipTableComponent implements OnInit {
           this.toastr.error(error.error);
         }
       );
+
+    this.toastr.info("Shift hours checker function has been triggered. ");
     this.initTable();
   }
 
   onClickUpdate() {}
 
-  onClickDelete() {}
+  onClickDelete() {
+    this.dataService
+      .deleteByParams(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+  }
 
   private initForm() {
     this.queryForm = new FormGroup({

@@ -3,7 +3,6 @@ import { ShipModel, ShipType } from "../../shared/models/ship.model";
 import { DataService } from "../../shared/service/http/data.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
-import { response } from "express";
 
 @Component({
   selector: "app-ship-table",
@@ -54,12 +53,23 @@ export class ShipTableComponent implements OnInit {
         }
       );
 
+    this.toastr.info("Tax rate checker function has been triggered. ");
     this.initTable();
   }
 
   onClickUpdate() {}
 
-  onClickDelete() {}
+  onClickDelete() {
+    this.dataService
+      .deleteByParams(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+  }
 
   private initForm() {
     this.queryForm = new FormGroup({

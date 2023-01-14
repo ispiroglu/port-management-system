@@ -36,10 +36,7 @@ export class DataService extends BaseHttpService {
 
   deleteByParams(domain: string, filters: any) {
     const params = this.objectToHttpParams(filters);
-    return this.delete<any>(
-      `\`http://localhost:3000/${domain}/getFiltered\``,
-      params
-    );
+    return this.delete<any>(`http://localhost:3000/${domain}/delete`, params);
   }
 
   createOnDomain(domain: string, body: any) {

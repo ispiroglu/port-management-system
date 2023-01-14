@@ -56,7 +56,17 @@ export class ShipOwnerTableComponent implements OnInit {
 
   onClickUpdate() {}
 
-  onClickDelete() {}
+  onClickDelete() {
+    this.dataService
+      .deleteByParams(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+  }
 
   private initForm() {
     this.queryForm = new FormGroup({
