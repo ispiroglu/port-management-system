@@ -1,0 +1,65 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title ">Dynamic Table</h4>
+                <p class="card-category">This section is visualization of the predefined queries. </p>
+                <p class="card-category">Latest query:</p>
+                <p class="card-category"> {{ latestQuery }}</p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                        <ng-container *ngFor="let header of tableHeaders">
+                            <th>
+                                {{ header }}
+                            </th>
+                        </ng-container>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let row of tableValues; let i = index">
+                            <td *ngFor="let col of row">
+                                {{ col }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title ">Predefined Queries</h4>
+                <p class="card-category">This section is about predefined queries and their works</p>
+            </div>
+            <div class="card-body">
+                <div class="row grid justify-content-around mb-4">
+                    <p>This query is predefined and does the following:</p>
+                    <p>Returns people older than 50 years and works in merchant type ships</p>
+                    <button class="btn btn-success" type="button" >Intersect</button>
+                </div>
+                <div class="row grid justify-content-around mb-4">
+                    <p>This query is predefined and does the following:</p>
+                    <p>Returns people younger than 30 years old OR has private ship</p>
+                    <button class="btn btn-success" type="button" >Union</button>
+                </div>
+                <div class="row grid justify-content-around mb-4">
+                    <p>This query is predefined and does the following:</p>
+                    <p>Returns ships that are private but tax free</p>
+                    <button class="btn btn-success" type="button" >Except</button>
+                </div>
+                <div class="row grid justify-content-around mb-4">
+                    <p>This query is predefined and does the following:</p>
+                    <p>Returns ships that has at least 2 workers</p>
+                    <button class="btn btn-success" type="button" >Having</button>
+                </div>
+                <div class="row grid justify-content-around mb-4">
+                    <p>This query is predefined and does the following:</p>
+                    <p>Returns the public servant count</p>
+                    <button class="btn btn-success" type="button" >Aggr</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -24,7 +24,7 @@ where ship.shiptype='private'
 EXCEPT
 select shipname
 from ship
-where ship.taxrate != 1.0
+where ship.taxrate != 0.0
 `;
 
 export const HAVING_SHIPS_THAT_HAVE_MIN_ONE_WORKER = `

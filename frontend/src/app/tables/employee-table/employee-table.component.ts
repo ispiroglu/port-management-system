@@ -41,7 +41,21 @@ export class EmployeeTableComponent implements OnInit {
     );
   }
 
-  onClickAdd() {}
+  onClickAdd() {
+    let val = this.queryForm.value;
+    val["employeeid"] = "nextval('employee_id_seq')";
+    console.log(val);
+    this.dataService
+      .createOnDomain(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+    this.initTable();
+  }
 
   onClickUpdate() {}
 

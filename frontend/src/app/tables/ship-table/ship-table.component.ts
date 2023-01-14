@@ -3,6 +3,7 @@ import { ShipModel, ShipType } from "../../shared/models/ship.model";
 import { DataService } from "../../shared/service/http/data.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
+import { response } from "express";
 
 @Component({
   selector: "app-ship-table",
@@ -25,15 +26,7 @@ export class ShipTableComponent implements OnInit {
   // TODO: handle errors
   ngOnInit() {
     this.initForm();
-    this.dataService.get<any>("http://localhost:3000/ship/getAll").subscribe(
-      (response) => {
-        this.shipList = response.body.rows;
-        this.latestQuery = response.body.query;
-      },
-      (error) => {
-        this.toastr.error(error.error);
-      }
-    );
+    this.initTable();
   }
 
   onSubmit() {
@@ -50,7 +43,19 @@ export class ShipTableComponent implements OnInit {
     );
   }
 
-  onClickAdd() {}
+  onClickAdd() {
+    this.dataService
+      .createOnDomain(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+
+    this.initTable();
+  }
 
   onClickUpdate() {}
 
@@ -66,5 +71,17 @@ export class ShipTableComponent implements OnInit {
       motorpower: new FormControl(null, [Validators.required]),
       taxrate: new FormControl(null, [Validators.required]),
     });
+  }
+
+  private initTable() {
+    this.dataService.get<any>("http://localhost:3000/ship/getAll").subscribe(
+      (response) => {
+        this.shipList = response.body.rows;
+        this.latestQuery = response.body.query;
+      },
+      (error) => {
+        this.toastr.error(error.error);
+      }
+    );
   }
 }

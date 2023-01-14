@@ -20,9 +20,9 @@ export class DataService extends BaseHttpService {
     return this.httpPatch(url, resource, headers, params);
   }
 
-  delete<T>(url: string) {
+  delete<T>(url: string, params: HttpParams) {
     let headers = new HttpHeaders();
-    return this.httpDelete(url, headers);
+    return this.httpDelete(url, headers, params);
   }
   get<T>(url: string, params?: HttpParams) {
     let headers = new HttpHeaders();
@@ -30,12 +30,28 @@ export class DataService extends BaseHttpService {
   }
 
   getFiltered<T>(domain: string, filters: any) {
+    const params = this.objectToHttpParams(filters);
+    return this.get<any>(`http://localhost:3000/${domain}/getFiltered`, params);
+  }
+
+  deleteByParams(domain: string, filters: any) {
+    const params = this.objectToHttpParams(filters);
+    return this.delete<any>(
+      `\`http://localhost:3000/${domain}/getFiltered\``,
+      params
+    );
+  }
+
+  createOnDomain(domain: string, body: any) {
+    return this.create<any>(body, `http://localhost:3000/${domain}/insert`);
+  }
+
+  private objectToHttpParams(filters: any) {
     let params = new HttpParams();
     for (const property in filters) {
       const val = filters[property];
       if (val != null && val != "") params = params.append(property, val);
     }
-
-    return this.get<any>(`http://localhost:3000/${domain}/getFiltered`, params);
+    return params;
   }
 }

@@ -1,8 +1,11 @@
 drop sequence if exists ship_id_seq;
 CREATE SEQUENCE ship_id_seq as integer;
 
-drop sequence if exists ship_worker_id_Seq;
-CREATE SEQUENCE ship_worker_id_Seq as integer;
+drop sequence if exists ship_worker_id_seq;
+CREATE SEQUENCE ship_worker_id_seq as integer;
+
+drop sequence if exists employee_id_seq;
+CREATE SEQUENCE employee_id_seq as integer;
 
 drop table if exists ship cascade ;
 CREATE TABLE ship (
@@ -133,9 +136,6 @@ on ship
 FOR ROW EXECUTE PROCEDURE taxrate_Insert_trigger_func();
 
 
-
-
-
 select * from ship;
 select * from ship_owner;
 select * from employee;
@@ -155,16 +155,16 @@ INSERT INTO ship VALUES (nextval('ship_id_seq'), 'private', 'Scenic', 'QR5479',8
 INSERT INTO ship VALUES (nextval('ship_id_seq'), 'private', 'Paul Gauguin', 'MG5994',7,12,7.0);
 INSERT INTO ship VALUES (nextval('ship_id_seq'), 'merchant', 'Oceania', 'LY6748',12,15,1.0);
 
-INSERT INTO employee VALUES (38484435414, 10000, 'Eric', 'Barton','supervisor');
-INSERT INTO employee VALUES (40358609500, 10001, 'Nicole', 'Griffin','financial advisor');
-INSERT INTO employee VALUES (42343612106, 10002, 'Kristin', 'Doyle','public servant');
-INSERT INTO employee VALUES (13291589772, 10003, 'Arthur', 'Hernandez','secretary');
-INSERT INTO employee VALUES (28467447800, 10004, 'John', 'Mccormick','public servant');
-INSERT INTO employee VALUES (21994752188, 10005, 'Cristina', 'Evans','secretary');
-INSERT INTO employee VALUES (75873603290, 10006, 'Rebecca', 'Lewis','public servant');
-INSERT INTO employee VALUES (97112906016, 10007, 'Michael', 'Reynolds','public servant');
-INSERT INTO employee VALUES (30887826776, 10008, 'John', 'Williams','security officer');
-INSERT INTO employee VALUES (98745849442, 10009, 'Sarah', 'Lang','assistant manager');
+INSERT INTO employee VALUES (38484435414, nextval('employee_id_seq'), 'Eric', 'Barton','supervisor');
+INSERT INTO employee VALUES (40358609500, nextval('employee_id_seq'), 'Nicole', 'Griffin','financial advisor');
+INSERT INTO employee VALUES (42343612106, nextval('employee_id_seq'), 'Kristin', 'Doyle','public servant');
+INSERT INTO employee VALUES (13291589772, nextval('employee_id_seq'), 'Arthur', 'Hernandez','secretary');
+INSERT INTO employee VALUES (28467447800, nextval('employee_id_seq'), 'John', 'Mccormick','public servant');
+INSERT INTO employee VALUES (21994752188, nextval('employee_id_seq'), 'Cristina', 'Evans','secretary');
+INSERT INTO employee VALUES (75873603290, nextval('employee_id_seq'), 'Rebecca', 'Lewis','public servant');
+INSERT INTO employee VALUES (97112906016, nextval('employee_id_seq'), 'Michael', 'Reynolds','public servant');
+INSERT INTO employee VALUES (30887826776, nextval('employee_id_seq'), 'John', 'Williams','security officer');
+INSERT INTO employee VALUES (98745849442, nextval('employee_id_seq'), 'Sarah', 'Lang','assistant manager');
 
 -- 8-9, 6mden uzun private tekneler ve birer tane belgesi olan murettebata sahipler.
 -- 1-2-4-7-10 merchant tekneler onlarin da en az bir tane murettebatı var.
@@ -180,16 +180,16 @@ insert into ship_worker (citizenId, fname, lname, age, has_license) values ('154
 insert into ship_worker (citizenId, fname, lname, age, has_license) values ('86627201433', 'Gwenny', 'Ranahan', 60, false);
 insert into ship_worker (citizenId, fname, lname, age, has_license) values ('03964312266', 'Ambrosi', 'Jorczyk', 99, true);
 
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 91653654058, 1);
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 28968473514, 2);
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 27478030959, 4);
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 17168473679, 4);
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 45049542164, 7);
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 58999065294, 10);
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 66322126673, 10);
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 15421050898, 1);
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 86627201433, 8);
-INSERT INTO crew VALUES (nextval('ship_worker_id_Seq'), 03964312266, 9);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 91653654058, 1);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 28968473514, 2);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 27478030959, 4);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 17168473679, 4);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 45049542164, 7);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 58999065294, 10);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 66322126673, 10);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 15421050898, 1);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 86627201433, 8);
+INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 03964312266, 9);
 
 INSERT INTO ship_owner VALUES (37683052026,  'Valerie', 'Thompson','Marketing Harmony',43);
 INSERT INTO ship_owner VALUES (86439117908,  'Jason', 'Jackson','InStyle',28);

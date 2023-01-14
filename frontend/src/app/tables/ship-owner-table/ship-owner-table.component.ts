@@ -41,7 +41,18 @@ export class ShipOwnerTableComponent implements OnInit {
     );
   }
 
-  onClickAdd() {}
+  onClickAdd() {
+    this.dataService
+      .createOnDomain(this.domain, this.queryForm.value)
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error);
+        }
+      );
+    this.initTable();
+  }
 
   onClickUpdate() {}
 

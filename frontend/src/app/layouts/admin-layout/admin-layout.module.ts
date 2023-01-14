@@ -16,6 +16,7 @@ import { ShipMemberTableComponent } from "../../tables/ship-member-table/ship-me
 import { EmployeeTableComponent } from "../../tables/employee-table/employee-table.component";
 import { CrewTableComponent } from "../../tables/crew-table/crew-table.component";
 import { OwnershipTableComponent } from "../../tables/ownership-table/ownership-table.component";
+import { ExtrasComponent } from "../../tables/extras/extras.component";
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { OwnershipTableComponent } from "../../tables/ownership-table/ownership-
     EmployeeTableComponent,
     CrewTableComponent,
     OwnershipTableComponent,
+    ExtrasComponent,
   ],
 })
 export class AdminLayoutModule {}
