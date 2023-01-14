@@ -10,6 +10,7 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./crew-table.component.css"],
 })
 export class CrewTableComponent {
+  domain: string = "crew";
   crewList: CrewModel[] = [new CrewModel(1, 11111111, 1)];
   queryForm: FormGroup;
   latestQuery: string = "";
@@ -24,8 +25,19 @@ export class CrewTableComponent {
     this.initTable();
   }
 
-  onSubmit() {}
-
+  onSubmit() {
+    this.dataService.getFiltered(this.domain, this.queryForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        this.crewList = response.body.rows;
+        this.latestQuery = response.body.query;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error);
+      }
+    );
+  }
   onClickAdd() {}
 
   onClickUpdate() {}
@@ -35,8 +47,8 @@ export class CrewTableComponent {
   private initForm() {
     this.queryForm = new FormGroup({
       id: new FormControl(null),
-      citizenId: new FormControl(null),
-      shipId: new FormControl(null),
+      citizenid: new FormControl(null),
+      shipid: new FormControl(null),
     });
   }
 

@@ -10,6 +10,7 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./ownership-table.component.css"],
 })
 export class OwnershipTableComponent implements OnInit {
+  domain: string = "ownership";
   ownershipList: OwnershipModel[] = [
     new OwnershipModel(1, 11111111111, "2022-15-2", 1),
   ];
@@ -26,7 +27,19 @@ export class OwnershipTableComponent implements OnInit {
     this.initForm();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.dataService.getFiltered(this.domain, this.queryForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        this.ownershipList = response.body.rows;
+        this.latestQuery = response.body.query;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error);
+      }
+    );
+  }
 
   onClickAdd() {}
 
@@ -36,10 +49,10 @@ export class OwnershipTableComponent implements OnInit {
 
   private initForm() {
     this.queryForm = new FormGroup({
-      shipId: new FormControl(null, [Validators.required]),
-      citizenId: new FormControl(null, [Validators.required]),
-      licensedAt: new FormControl(null, [Validators.required]),
-      licensedBy: new FormControl(null, [Validators.required]),
+      shipid: new FormControl(null, [Validators.required]),
+      citizenid: new FormControl(null, [Validators.required]),
+      licensedat: new FormControl(null, [Validators.required]),
+      licensedby: new FormControl(null, [Validators.required]),
     });
   }
 

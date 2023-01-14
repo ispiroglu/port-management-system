@@ -10,6 +10,7 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./ship-table.component.css"],
 })
 export class ShipTableComponent implements OnInit {
+  domain: string = "ship";
   shipList: ShipModel[] = [
     new ShipModel(1, ShipType.Private, "Ship Name", "34LICENSE34", 5, 10, 0),
   ];
@@ -36,7 +37,17 @@ export class ShipTableComponent implements OnInit {
   }
 
   onSubmit() {
-    this.toastr.error("Ğ");
+    this.dataService.getFiltered(this.domain, this.queryForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        this.shipList = response.body.rows;
+        this.latestQuery = response.body.query;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error);
+      }
+    );
   }
 
   onClickAdd() {}
@@ -47,13 +58,13 @@ export class ShipTableComponent implements OnInit {
 
   private initForm() {
     this.queryForm = new FormGroup({
-      id: new FormControl(null, [Validators.required]),
-      shipName: new FormControl(null, [Validators.required]),
-      shipType: new FormControl(null, [Validators.required]),
-      licensePlate: new FormControl(null, [Validators.required]),
+      shipid: new FormControl(null, [Validators.required]),
+      shipname: new FormControl(null, [Validators.required]),
+      shiptype: new FormControl(null, [Validators.required]),
+      licenseplate: new FormControl(null, [Validators.required]),
       length: new FormControl(null, [Validators.required]),
-      motorPower: new FormControl(null, [Validators.required]),
-      taxRate: new FormControl(null, [Validators.required]),
+      motorpower: new FormControl(null, [Validators.required]),
+      taxrate: new FormControl(null, [Validators.required]),
     });
   }
 }
