@@ -1,4 +1,6 @@
+const { response } = require('express');
 const db = require('../database/db-operations');
+const predefined = require('../database/predefined-operations');
 
 const getAll = async (request, response) => {
     try {
@@ -55,10 +57,22 @@ const update = async (request, response) => {
     }
 }
 
+const getYoungOrPrivateOwner = async (request, response) => {
+    try {
+        var queryResult = await predefined.unionPrivateShipOwnersOrYoungShipOwners();
+        console.log(queryResult);
+        response.status(200).json(queryResult);
+    } catch (error) {
+        console.log(error);
+        response.status(400).json(error);
+    }
+} 
+
 module.exports = {
     getAll,
     getFiltered,
     insert,
     deletes,
-    update
+    update,
+    getYoungOrPrivateOwner
 }

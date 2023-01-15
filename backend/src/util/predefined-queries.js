@@ -35,7 +35,7 @@ group by crew.shipid
 having count(*)>1
 `;
 
-export const AGGR_PUBLIC_SERVENT_COUNT = `
+export const AGGR_PUBLIC_SERVANT_COUNT = `
 select count(*)
 from employee
 where position='public servant'
