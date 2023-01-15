@@ -47,9 +47,16 @@ async function update(tableName, params) {
 }
 
 async function shipInsert(params) {
-    let query = `insert into ship values (nextval('ship_id_seq'),'${params.shiptype}','${params.shipname}','${params.licenseplate}',${params.shiplength},${params.motorpower},${params.taxrate})`;
-    console.log(query);
-    console.log(params);
+    let query = `insert into ship values(nextval('ship_id_seq'),'${params.shiptype}','${params.shipname}','${params.licenseplate}',${params.shiplength},${params.motorpower},${params.taxrate})`;
+    var response = await client.query(query);
+    return {
+        query: query,
+        rows: response.rows
+    }
+}
+
+async function employeeInsert(params) {
+    let query = `insert into employee values(${params.citizenid},nextval('employee_id_seq'),'${params.fname}','${params.lname}',${params.position})`;
     var response = await client.query(query);
     return {
         query: query,
@@ -63,5 +70,6 @@ module.exports = {
     insert,
     deletes,
     update,
-    shipInsert
+    shipInsert,
+    employeeInsert
 }
