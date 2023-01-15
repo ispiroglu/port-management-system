@@ -46,10 +46,40 @@ async function update(tableName, params) {
     }
 }
 
+async function shipInsert(params) {
+    let query = `insert into ship values (nextval('ship_id_seq'),'${params.shiptype}','${params.shipname}','${params.licenseplate}',${params.shiplength},${params.motorpower},${params.taxrate})`;
+    var response = await client.query(query);
+    return {
+        query: query,
+        rows: response.rows
+    }
+}
+
+async function employeeInsert(params) {
+    let query = `insert into employee values (${params.citizenid},nextval('employee_id_seq'),'${params.fname}','${params.lname}',${params.position})`;
+    var response = await client.query(query);
+    return {
+        query: query,
+        rows: response.rows
+    }
+}
+
+async function crewInsert(params) {
+    let query = `insert into crew values (nextval('ship_worker_id_seq'),${params.citizenid},${params.shipid})`;
+    var response = await client.query(query);
+    return {
+        query: query,
+        rows: response.rows
+    }
+}
+
 module.exports = {
     getAll,
     getFiltered,
     insert,
     deletes,
-    update
+    update,
+    shipInsert,
+    employeeInsert,
+    crewInsert
 }

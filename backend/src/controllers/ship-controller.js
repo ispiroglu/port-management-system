@@ -24,7 +24,7 @@ const getFiltered = async (request, response) => {
 
 const insert = async (request, response) => {
     try {
-        var queryResult = await db.insert('ship', request.body);
+        var queryResult = await db.shipInsert(request.body);
         console.log(queryResult);
         response.status(200).json(queryResult);
     } catch (error) {
