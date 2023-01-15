@@ -46,10 +46,22 @@ async function update(tableName, params) {
     }
 }
 
+async function shipInsert(params) {
+    let query = `insert into ship values (nextval('ship_id_seq'),'${params.shiptype}','${params.shipname}','${params.licenseplate}',${params.shiplength},${params.motorpower},${params.taxrate})`;
+    console.log(query);
+    console.log(params);
+    var response = await client.query(query);
+    return {
+        query: query,
+        rows: response.rows
+    }
+}
+
 module.exports = {
     getAll,
     getFiltered,
     insert,
     deletes,
-    update
+    update,
+    shipInsert
 }
