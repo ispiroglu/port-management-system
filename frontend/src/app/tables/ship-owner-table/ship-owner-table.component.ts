@@ -66,6 +66,7 @@ export class ShipOwnerTableComponent implements OnInit {
           this.toastr.error(error.error.detail);
         }
       );
+    this.initTable();
   }
 
   private initForm() {

@@ -37,27 +37,60 @@
                 <div class="row grid justify-content-around mb-4">
                     <p>This query is predefined and does the following:</p>
                     <p>Returns people older than 50 years and works in merchant type ships</p>
-                    <button class="btn btn-success" type="button" >Intersect</button>
+                    <button class="btn btn-success" type="button" (click)="onClickIntersect()" >Intersect</button>
                 </div>
                 <div class="row grid justify-content-around mb-4">
                     <p>This query is predefined and does the following:</p>
                     <p>Returns people younger than 30 years old OR has private ship</p>
-                    <button class="btn btn-success" type="button" >Union</button>
+                    <button class="btn btn-success" type="button" (click)="onClickUnion()"  >Union</button>
                 </div>
                 <div class="row grid justify-content-around mb-4">
                     <p>This query is predefined and does the following:</p>
                     <p>Returns ships that are private but tax free</p>
-                    <button class="btn btn-success" type="button" >Except</button>
+                    <button class="btn btn-success" type="button" (click)="onClickExcept()" >Except</button>
                 </div>
                 <div class="row grid justify-content-around mb-4">
                     <p>This query is predefined and does the following:</p>
                     <p>Returns ships that has at least 2 workers</p>
-                    <button class="btn btn-success" type="button" >Having</button>
+                    <button class="btn btn-success" type="button" (click)="onClickHaving()">Having</button>
                 </div>
                 <div class="row grid justify-content-around mb-4">
                     <p>This query is predefined and does the following:</p>
                     <p>Returns the public servant count</p>
-                    <button class="btn btn-success" type="button" >Aggr</button>
+                    <button class="btn btn-success" type="button" (click)="onClickAggr()">Aggr</button>
+                </div>
+                <div class="row grid justify-content-around mb-4">
+                    <p>This query is predefined and does the following:</p>
+                    <p>Returns the private ship owners on view</p>
+                    <button class="btn btn-success" type="button" (click)="onClickView()">View</button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title ">Funtion Queries</h4>
+                <p class="card-category">This section is about function queries and their returns</p>
+            </div>
+            <div class="card-body">
+                <div class="row grid justify-content-around mb-4">
+                    <p>This function is for returning the average ages of ship workers on specific type:</p>
+                    <select #selectedElement (change)="onChangeDropdown(selectedElement.value)">
+                        <option value="merchant">Merchant</option>
+                        <option value="private">Private</option>
+                    </select>
+                    <button class="btn btn-success" type="button" (click)="onClickAvgOnType()" >Submit</button>
+                    <div *ngIf="shipTypeRequested" class="row">
+                        <p class="col-12 justify-text-center"> Average age of workers on ship type {{shipType}}: {{shipTypeResult}} </p>
+                    </div>
+                </div>
+                <div class="row grid justify-content-around mb-4">
+                    <p>This function is for filtering ships according to user inputs :</p>
+                    <input type="number" max="200" placeholder="Ship Length" [(ngModel)]="shipLength" >
+                    <input type="number" max="200" placeholder="Motor Power" [(ngModel)]="motorPower" >
+                    <button class="btn btn-success" type="button" (click)="onClickMotorLengthFilter()"  >Submit</button>
+                    <div *ngIf="numOfFilteredRequested" class="row">
+                        <p class="col-12 justify-text-center"> Number of filtered ships: {{numOfFilteredShips}} </p>
+                    </div>
                 </div>
             </div>
         </div>
