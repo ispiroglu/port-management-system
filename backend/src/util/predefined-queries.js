@@ -41,6 +41,7 @@ from employee
 where position='public servant'
 `;
 
+
 module.exports = {
   INTERSECT_OLD_MERCHANT_WORKERS,
   UNION_PRIVATE_SHIP_OWNERS_OR_YOUNG_SHIP_OWNERS,

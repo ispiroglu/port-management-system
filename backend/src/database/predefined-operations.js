@@ -6,7 +6,8 @@ async function intersectOldMerchantWorkes() {
     var response = await client.query(query);
     return {
         query: query,
-        rows: response.rows
+        rows: response.rows,
+        columns: response.fields
     }
 }
 
@@ -15,7 +16,8 @@ async function unionPrivateShipOwnersOrYoungShipOwners() {
     var response = await client.query(query);
     return {
         query: query,
-        rows: response.rows
+        rows: response.rows,
+        columns: response.fields
     }
 }
 
@@ -24,7 +26,8 @@ async function exceptPrivateButTaxfreeShips() {
     var response = await client.query(query);
     return {
         query: query,
-        rows: response.rows
+        rows: response.rows,
+        columns: response.fields
     }
 }
 
@@ -33,7 +36,8 @@ async function havingShipsThatHaveMinOneWorker() {
     var response = await client.query(query);
     return {
         query: query,
-        rows: response.rows
+        rows: response.rows,
+        columns: response.fields
     }
 }
 
@@ -42,7 +46,8 @@ async function servantCount() {
     var response = await client.query(query);
     return {
         query: query,
-        rows: response.rows
+        rows: response.rows,
+        columns: response.fields
     }
 }
 
@@ -51,7 +56,8 @@ async function getPrivateShipOwners() {
     var response = await client.query(query);
     return {
         query: query,
-        rows: response.rows
+        rows: response.rows,
+        columns: response.fields
     }
 }
 
