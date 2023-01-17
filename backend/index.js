@@ -35,6 +35,7 @@ app.put("/employee/update", employee.update);
 app.get("/member/getAll", member.getAll);
 app.get("/member/getFiltered", member.getFiltered);
 app.get("/member/getOldAndMerchant", member.getOldAndMerchant);
+app.get("/member/getWorkerLicenseFilter", member.getWorkerLicenseFilter);
 app.post("/member/insert", member.insert);
 app.delete("/member/delete", member.deletes);
 app.put("/member/update", member.update);
