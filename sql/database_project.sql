@@ -5,7 +5,7 @@ drop sequence if exists ship_worker_id_seq;
 CREATE SEQUENCE ship_worker_id_seq as integer;
 
 drop sequence if exists employee_id_seq;
-CREATE SEQUENCE employee_id_seq as integer;
+CREATE SEQUENCE employee_id_seq as integer start with 10000 ;
 
 drop table if exists ship cascade ;
 CREATE TABLE ship (
