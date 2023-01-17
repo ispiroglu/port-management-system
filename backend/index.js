@@ -40,6 +40,7 @@ app.put('/member/update', member.update);
 app.get('/owner/getAll', owner.getAll);
 app.get('/owner/getFiltered', owner.getFiltered);
 app.get('/owner/getYoungOrPrivate', owner.getYoungOrPrivateOwner);
+app.get('/owner/getPrivate', owner.getPrivateShipOwners);
 app.post('/owner/insert', owner.insert);
 app.delete('/owner/delete', owner.deletes);
 app.put('/owner/update', owner.update);

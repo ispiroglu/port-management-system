@@ -46,10 +46,20 @@ async function servantCount() {
     }
 }
 
+async function getPrivateShipOwners() {
+    let query = `select * from private_ship_owners`;
+    var response = await client.query(query);
+    return {
+        query: query,
+        rows: response.rows
+    }
+}
+
 module.exports = {
     intersectOldMerchantWorkes,
     unionPrivateShipOwnersOrYoungShipOwners,
     exceptPrivateButTaxfreeShips,
     havingShipsThatHaveMinOneWorker,
-    servantCount
+    servantCount,
+    getPrivateShipOwners
 }
