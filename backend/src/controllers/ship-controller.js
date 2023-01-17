@@ -78,6 +78,29 @@ const getHasWorker = async (request, response) => {
     }
 }
 
+const getShipPowerLengthFilter = async (request, response) => {
+    try {
+        var queryResult = await predefined.getShipPowerLengthFilter(request.body.motorPower, request.body.shipLength);
+        console.log(queryResult);
+        response.status(200).json(queryResult);
+    } catch (error) {
+        console.log(error);
+        response.status(400).json(error);
+    }
+}
+
+const getAvgWorkerAge = async (request, response) => {
+    try {
+        var queryResult = await predefined.getAvgWorkerAge(request.body.shipType);
+        console.log(queryResult);
+        response.status(200).json(queryResult);
+    } catch (error) {
+        console.log(error);
+        response.status(400).json(error);
+    }
+}
+
+
 module.exports = {
     getAll,
     getFiltered,
@@ -85,5 +108,7 @@ module.exports = {
     deletes,
     update,
     getPrivateAndTaxfree,
-    getHasWorker
+    getHasWorker,
+    getShipPowerLengthFilter,
+    getAvgWorkerAge
 }

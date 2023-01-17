@@ -74,20 +74,20 @@ async function getPrivateShipOwners() {
 }
 
 async function getAvgWorkerAge(shipType) {
-    let query = `select avg_age(${shipType})`;
+    let query = `select avg_age('${shipType}')`;
     var response = await client.query(query);
     return {
         query: query,
-        rows: response.rows
+        result: response.rows[0].avg_age
     }
 }
 
 async function getShipPowerLengthFilter(power, length) {
-    let query = `select numf_of_filtered_ships_by_power_and_length(${power},${length})`;
+    let query = `select num_of_filtered_ships_by_power_and_length(${power},${length})`;
     var response = await client.query(query);
     return {
         query: query,
-        rows: response.rows
+        result: response.rows[0].num_of_filtered_ships_by_power_and_length
     }
 }
 

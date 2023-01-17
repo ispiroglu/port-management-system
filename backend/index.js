@@ -55,6 +55,8 @@ app.get('/ship/getAll', ship.getAll);
 app.get('/ship/getFiltered', ship.getFiltered);
 app.get('/ship/getPrivateTaxfree', ship.getPrivateAndTaxfree);
 app.get('/ship/getHasWorker', ship.getHasWorker);
+app.get('/ship/getPowerLengthFilter', ship.getShipPowerLengthFilter);
+app.get('/ship/getAvgWorkerAge', ship.getAvgWorkerAge);
 app.post('/ship/insert', ship.insert);
 app.delete('/ship/delete', ship.deletes);
 app.put('/ship/update', ship.update);
