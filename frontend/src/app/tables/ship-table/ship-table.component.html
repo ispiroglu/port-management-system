@@ -35,7 +35,9 @@
                                 </th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let ship of shipList">
+                                    <tr *ngFor="let ship of shipList"
+                                        (click)="onClickItem(ship)"
+                                    >
                                         <td>{{ ship.shipid }}</td>
                                         <td>{{ ship.shipname }}</td>
                                         <td>{{ ship.shiptype }}</td>
@@ -80,7 +82,7 @@
                             <div class="row">
                                 <div class="input-group col-md-4">
                                     <span class="input-group-text" >Length</span>
-                                    <input type="number" class="form-control" formControlName="length">
+                                    <input type="number" class="form-control" formControlName="shiplength">
                                 </div>
                                 <div class="input-group col-md-4">
                                     <span class="input-group-text" >Motor Power</span>

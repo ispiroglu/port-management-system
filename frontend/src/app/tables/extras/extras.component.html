@@ -72,24 +72,43 @@
                 <p class="card-category">This section is about function queries and their returns</p>
             </div>
             <div class="card-body">
-                <div class="row grid justify-content-around mb-4">
-                    <p>This function is for returning the average ages of ship workers on specific type:</p>
-                    <select #selectedElement (change)="onChangeDropdown(selectedElement.value)">
-                        <option value="merchant">Merchant</option>
-                        <option value="private">Private</option>
-                    </select>
-                    <button class="btn btn-success" type="button" (click)="onClickAvgOnType()" >Submit</button>
-                    <div *ngIf="shipTypeRequested" class="row">
-                        <p class="col-12 justify-text-center"> Average age of workers on ship type {{shipType}}: {{shipTypeResult}} </p>
+                <div class="grid justify-content-around mb-4">
+                   <div class="row grid justify-content-around mb-4">
+                       <div class="row">
+                           <p>This function is for returning the average ages of ship workers on specific type:</p>
+                           <select #selectedElement  class="form-control" (change)="onChangeDropdown(selectedElement.value)">
+                               <option selected value="merchant">Merchant</option>
+                               <option value="private">Private</option>
+                           </select>
+                           <button class="btn btn-success" type="button" (click)="onClickAvgOnType()" >Submit</button>
+                       </div>
+                       <div *ngIf="shipTypeRequested" class="row">
+                           <p class="col-12 justify-text-center"> Average age of workers on ship type {{shipType}}: {{shipTypeResult}} </p>
+                       </div>
+                   </div>
+                    <hr>
+                    <div class="row grid justify-content-around mb-4">
+                        <div class="row">
+                            <p>This function is for filtering ships according to user inputs :</p>
+                            <input class="form-control" type="number" max="200" placeholder="Ship Length" [(ngModel)]="shipLength" >
+                            <input class="form-control" type="number" max="200" placeholder="Motor Power" [(ngModel)]="motorPower" >
+                            <button class="btn btn-success" type="button" (click)="onClickMotorLengthFilter()"  >Submit</button>
+
+                        </div>
+                         <div *ngIf="numOfFilteredRequested" class="row">
+                            <p class="col-12 justify-text-center"> Number of filtered ships: {{numOfFilteredShips}} </p>
+                        </div>
                     </div>
-                </div>
-                <div class="row grid justify-content-around mb-4">
-                    <p>This function is for filtering ships according to user inputs :</p>
-                    <input type="number" max="200" placeholder="Ship Length" [(ngModel)]="shipLength" >
-                    <input type="number" max="200" placeholder="Motor Power" [(ngModel)]="motorPower" >
-                    <button class="btn btn-success" type="button" (click)="onClickMotorLengthFilter()"  >Submit</button>
-                    <div *ngIf="numOfFilteredRequested" class="row">
-                        <p class="col-12 justify-text-center"> Number of filtered ships: {{numOfFilteredShips}} </p>
+                    <hr>
+                    <div class="row grid justify-content-around mb-4">
+                        <div class="row">
+                            <p>This function is for filtering workers according to licenses :</p>
+                            <input class="form-control"  type="checkbox" placeholder="License Checkbox" [(ngModel)]="licenseCheckbox" >
+                            <button class="btn btn-success" type="button" (click)="onClickFilterWorker()"  >Submit</button>
+                        </div>
+                         <div *ngIf="licenseRequested" class="row">
+                            <p class="col-12 justify-text-center"> Number of {{ licenseCheckbox ? 'licensed' : 'not licensed' }} workers: {{licenseValue}} </p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import { ToastrService } from "ngx-toastr";
 export class ShipMemberTableComponent implements OnInit {
   // TODO: Boolean türlerin çıktısı tik olmalı
   domain: string = "member";
+  selectedMember: ShipMemberModel;
   shipMemberList: ShipMemberModel[] = [
     new ShipMemberModel(11322322454, "Evren", "Ispiroglu", 20, true),
   ];
@@ -55,7 +56,20 @@ export class ShipMemberTableComponent implements OnInit {
     this.initTable();
   }
 
-  onClickUpdate() {}
+  onClickUpdate() {
+    this.dataService
+      .updateOnDomain(this.domain, this.queryForm.value, {
+        citizenid: this.selectedMember.citizenid,
+      })
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error.detail);
+        }
+      );
+    this.initTable();
+  }
 
   onClickDelete() {
     this.dataService
@@ -69,13 +83,18 @@ export class ShipMemberTableComponent implements OnInit {
       );
   }
 
+  onClickItem(member: ShipMemberModel) {
+    this.selectedMember = member;
+    this.queryForm.patchValue(member);
+  }
+
   private initForm() {
     this.queryForm = new FormGroup({
       citizenid: new FormControl(null, [Validators.required]),
       fname: new FormControl(null, [Validators.required]),
       lname: new FormControl(null, [Validators.required]),
       age: new FormControl(null, [Validators.required, Validators.min(18)]),
-      has_license: new FormControl(null),
+      has_license: new FormControl(false),
     });
   }
 

@@ -46,8 +46,11 @@ CREATE TABLE owner_ship(
 	primary key (shipId, citizenId),
 	foreign key (shipId) references ship(shipId),
 	foreign key (citizenId) references ship_owner(citizenId),
-	foreign key (licensedBy) references employee(employeeId)
+	foreign key (licensedBy) references employee(employeeId),
+	CONSTRAINT owner_ship FOREIGN KEY (citizenId) REFERENCES ship_owner (citizenId) ON DELETE CASCADE
 );
+
+
 
 drop table if exists ship_worker cascade ;
 CREATE TABLE ship_worker
@@ -100,23 +103,23 @@ END;
 'LANGUAGE plpgsql;
 
 
--- Trigger that controls is transaction time in shift hours.
-CREATE FUNCTION licensing_trigger_func()
-RETURNS TRIGGER AS $$
-BEGIN
-IF ( to_char(now(), 'DY') in ('SAT', 'SUN') OR to_char(now(), 'HH24') not between '09' and '17') THEN
-RAISE EXCEPTION 'You can give license only at work days/hours' ;
-RETURN null;
-ELSE
-	RETURN new;
-END IF;
-END;
-$$ LANGUAGE 'plpgsql';
-
-CREATE TRIGGER licensing_trigger
-BEFORE INSERT or UPDATE
-on owner_ship
-FOR EACH ROW EXECUTE PROCEDURE licensing_trigger_func();
+-- -- Trigger that controls is transaction time in shift hours.
+-- CREATE FUNCTION licensing_trigger_func()
+-- RETURNS TRIGGER AS $$
+-- BEGIN
+-- IF ( to_char(now(), 'DY') in ('SAT', 'SUN') OR to_char(now(), 'HH24') not between '09' and '17') THEN
+-- RAISE EXCEPTION 'You can give license only at work days/hours' ;
+-- RETURN null;
+-- ELSE
+-- 	RETURN new;
+-- END IF;
+-- END;
+-- $$ LANGUAGE 'plpgsql';
+--
+-- CREATE TRIGGER licensing_trigger
+-- BEFORE INSERT or UPDATE
+-- on owner_ship
+-- FOR EACH ROW EXECUTE PROCEDURE licensing_trigger_func();
 
 -- Trigger that controls taxrate
 CREATE FUNCTION taxrate_insert_trigger_func()

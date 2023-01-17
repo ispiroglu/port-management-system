@@ -11,6 +11,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class ShipOwnerTableComponent implements OnInit {
   domain: string = "owner";
+  selectedShipOwner: ShipOwnerModel;
   shipOwnerList: ShipOwnerModel[] = [
     new ShipOwnerModel(3353343326, "Hasan", "Hüseyin", 55, "Kardeşler Kundura"),
   ];
@@ -54,7 +55,21 @@ export class ShipOwnerTableComponent implements OnInit {
     this.initTable();
   }
 
-  onClickUpdate() {}
+  onClickUpdate() {
+    this.dataService
+      .updateOnDomain(this.domain, this.queryForm.value, {
+        citizenid: this.selectedShipOwner.citizenid,
+      })
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error.detail);
+        }
+      );
+
+    this.initTable();
+  }
 
   onClickDelete() {
     this.dataService
@@ -67,6 +82,11 @@ export class ShipOwnerTableComponent implements OnInit {
         }
       );
     this.initTable();
+  }
+
+  onClickItem(owner: ShipOwnerModel) {
+    this.selectedShipOwner = owner;
+    this.queryForm.patchValue(owner);
   }
 
   private initForm() {

@@ -3,6 +3,8 @@ import { CrewModel } from "../../shared/models/crew.model";
 import { FormControl, FormGroup } from "@angular/forms";
 import { DataService } from "../../shared/service/http/data.service";
 import { ToastrService } from "ngx-toastr";
+import { ShipOwnerModel } from "../../shared/models/ship-owner.model";
+import { ShipModel } from "../../shared/models/ship.model";
 
 @Component({
   selector: "app-crew-table",
@@ -11,6 +13,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class CrewTableComponent {
   domain: string = "crew";
+  selectedCrew: CrewModel;
   crewList: CrewModel[] = [new CrewModel(1, 11111111, 1)];
   queryForm: FormGroup;
   latestQuery: string = "";
@@ -50,7 +53,19 @@ export class CrewTableComponent {
       );
     this.initTable();
   }
-  onClickUpdate() {}
+  onClickUpdate() {
+    this.dataService
+      .updateOnDomain(this.domain, this.queryForm.value, {
+        id: this.selectedCrew.id,
+      })
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error.detail);
+        }
+      );
+  }
 
   onClickDelete() {
     this.dataService
@@ -62,6 +77,11 @@ export class CrewTableComponent {
           this.toastr.error(error.error.detail);
         }
       );
+  }
+
+  onClickItem(element: CrewModel) {
+    this.selectedCrew = element;
+    this.queryForm.patchValue(element);
   }
 
   private initForm() {

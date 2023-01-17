@@ -23,7 +23,9 @@
                                 </th>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let crew of crewList ">
+                                <tr *ngFor="let crew of crewList "
+                                    (click) = "onClickItem(crew)"
+                                >
                                     <td>{{ crew.id }}</td>
                                     <td>{{ crew.citizenid }}</td>
                                     <td>{{ crew.shipid }}</td>

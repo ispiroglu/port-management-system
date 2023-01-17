@@ -29,7 +29,9 @@
                                 </th>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let owner of shipOwnerList ">
+                                <tr *ngFor="let owner of shipOwnerList "
+                                    (click)="onClickItem(owner)"
+                                >
                                     <td>{{ owner.citizenid }}</td>
                                     <td>{{ owner.fname }}</td>
                                     <td>{{ owner.lname }}</td>
