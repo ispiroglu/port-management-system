@@ -52,7 +52,7 @@ async function servantCount() {
 }
 
 async function getPrivateShipOwners() {
-    let query = `select * from private_ship_owners`;
+    let query = predefinedQuery.VIEW_PRIVATE_SHIP_OWNERS;
     var response = await client.query(query);
     return {
         query: query,

@@ -41,6 +41,10 @@ from employee
 where position='public servant'
 `;
 
+const VIEW_PRIVATE_SHIP_OWNERS = `
+select *
+from private_ship_owners
+`
 
 module.exports = {
   INTERSECT_OLD_MERCHANT_WORKERS,
@@ -48,4 +52,5 @@ module.exports = {
   EXCEPT_PRIVATE_BUT_TAXFREE_SHIPS,
   HAVING_SHIPS_THAT_HAVE_MIN_ONE_WORKER,
   AGGR_PUBLIC_SERVANT_COUNT,
+  VIEW_PRIVATE_SHIP_OWNERS
 };
