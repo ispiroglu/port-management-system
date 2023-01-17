@@ -201,15 +201,15 @@ INSERT INTO employee VALUES (98745849442, nextval('employee_id_seq'), 'Sarah', '
 -- 1-2-4-7-10 merchant tekneler onlarin da en az bir tane murettebatı var.
 
 insert into ship_worker (citizenId, fname, lname, age, has_license) values ('91653654058', 'Lurline', 'Harker', 57, false);
-insert into ship_worker (citizenId, fname, lname, age, has_license) values ('28968473514', 'Parrnell', 'Denver', 89, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('28968473514', 'Parrnell', 'Denver', 33, false);
 insert into ship_worker (citizenId, fname, lname, age, has_license) values ('27478030959', 'Zacharie', 'Hugnot', 58, true);
-insert into ship_worker (citizenId, fname, lname, age, has_license) values ('17168473679', 'Damara', 'Hadlow', 72, false);
-insert into ship_worker (citizenId, fname, lname, age, has_license) values ('45049542164', 'Merrie', 'Archell', 83, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('17168473679', 'Damara', 'Hadlow', 25, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('45049542164', 'Merrie', 'Archell', 25, false);
 insert into ship_worker (citizenId, fname, lname, age, has_license) values ('58999065294', 'Braden', 'Walcar', 48, false);
 insert into ship_worker (citizenId, fname, lname, age, has_license) values ('66322126673', 'Fannie', 'Skin', 28, true);
 insert into ship_worker (citizenId, fname, lname, age, has_license) values ('15421050898', 'Bearnard', 'Keppel', 21, true);
-insert into ship_worker (citizenId, fname, lname, age, has_license) values ('86627201433', 'Gwenny', 'Ranahan', 60, false);
-insert into ship_worker (citizenId, fname, lname, age, has_license) values ('03964312266', 'Ambrosi', 'Jorczyk', 99, true);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('86627201433', 'Gwenny', 'Ranahan', 50, false);
+insert into ship_worker (citizenId, fname, lname, age, has_license) values ('03964312266', 'Ambrosi', 'Jorczyk', 30, true);
 
 INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 91653654058, 1);
 INSERT INTO crew VALUES (nextval('ship_worker_id_seq'), 28968473514, 2);
