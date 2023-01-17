@@ -29,7 +29,9 @@
                                 </th>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let employee of employeeList ">
+                                <tr *ngFor="let employee of employeeList "
+                                    (click)="onClickItem(employee)"
+                                >
                                     <td>{{ employee.employeeid }}</td>
                                     <td>{{ employee.citizenid }}</td>
                                     <td>{{ employee.fname }}</td>

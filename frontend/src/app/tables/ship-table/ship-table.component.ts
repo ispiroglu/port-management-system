@@ -11,6 +11,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class ShipTableComponent implements OnInit {
   domain: string = "ship";
+  selectedShip: ShipModel;
   shipList: ShipModel[] = [
     new ShipModel(1, ShipType.Private, "Ship Name", "34LICENSE34", 5, 10, 0),
   ];
@@ -55,7 +56,22 @@ export class ShipTableComponent implements OnInit {
     this.initTable();
   }
 
-  onClickUpdate() {}
+  onClickUpdate() {
+    this.dataService
+      .updateOnDomain(this.domain, this.queryForm.value, {
+        shipid: this.selectedShip.shipid,
+      })
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error.detail);
+        }
+      );
+
+    this.toastr.info("Tax rate checker function has been triggered. ");
+    this.initTable();
+  }
 
   onClickDelete() {
     this.dataService
@@ -66,6 +82,12 @@ export class ShipTableComponent implements OnInit {
           this.toastr.error(error.error.detail);
         }
       );
+    this.initTable();
+  }
+
+  onClickItem(ship: ShipModel) {
+    this.selectedShip = ship;
+    this.queryForm.patchValue(ship);
   }
 
   private initForm() {
@@ -74,7 +96,7 @@ export class ShipTableComponent implements OnInit {
       shipname: new FormControl(null, [Validators.required]),
       shiptype: new FormControl(null, [Validators.required]),
       licenseplate: new FormControl(null, [Validators.required]),
-      length: new FormControl(null, [Validators.required]),
+      shiplength: new FormControl(null, [Validators.required]),
       motorpower: new FormControl(null, [Validators.required]),
       taxrate: new FormControl(null, [Validators.required]),
     });

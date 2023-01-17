@@ -43,11 +43,21 @@ export class DataService extends BaseHttpService {
     return this.create<any>(body, `http://localhost:3000/${domain}/insert`);
   }
 
+  updateOnDomain(domain: string, updated: any, filter: any) {
+    const body = {
+      new: updated,
+      target: filter,
+    };
+    return this.update<any>(body, `http://localhost:3000/${domain}/update`);
+  }
+
   private objectToHttpParams(filters: any) {
     let params = new HttpParams();
     for (const property in filters) {
       const val = filters[property];
-      if (val != null && val != "") params = params.append(property, val);
+      if (val !== null && val !== "") {
+        params = params.append(property, val);
+      }
     }
     return params;
   }

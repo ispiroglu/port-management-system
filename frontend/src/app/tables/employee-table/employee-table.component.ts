@@ -3,6 +3,7 @@ import { EmployeeModel } from "../../shared/models/employee.model";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { DataService } from "../../shared/service/http/data.service";
 import { ToastrService } from "ngx-toastr";
+import { ShipModel } from "../../shared/models/ship.model";
 
 @Component({
   selector: "app-employee-table",
@@ -11,6 +12,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class EmployeeTableComponent implements OnInit {
   domain: string = "employee";
+  selectedEmployee: EmployeeModel;
   employeeList: EmployeeModel[] = [
     new EmployeeModel(1, 3341152132, "Asude Merve", "Ekiz", "Lisans Memuru"),
   ];
@@ -57,7 +59,20 @@ export class EmployeeTableComponent implements OnInit {
     this.initTable();
   }
 
-  onClickUpdate() {}
+  onClickUpdate() {
+    this.dataService
+      .updateOnDomain(this.domain, this.queryForm.value, {
+        employeeid: this.selectedEmployee.employeeid,
+      })
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error.detail);
+        }
+      );
+    this.initTable();
+  }
 
   onClickDelete() {
     this.dataService
@@ -69,6 +84,11 @@ export class EmployeeTableComponent implements OnInit {
           this.toastr.error(error.error.detail);
         }
       );
+  }
+
+  onClickItem(employee: EmployeeModel) {
+    this.selectedEmployee = employee;
+    this.queryForm.patchValue(employee);
   }
 
   private initForm() {

@@ -68,11 +68,23 @@ const getYoungOrPrivateOwner = async (request, response) => {
     }
 } 
 
+const getPrivateShipOwners = async (request, response) => {
+    try {
+        var queryResult = await predefined.getPrivateShipOwners();
+        console.log(queryResult);
+        response.status(200).json(queryResult);
+    } catch (error) {
+        console.log(error);
+        response.status(400).json(error);
+    }
+}
+
 module.exports = {
     getAll,
     getFiltered,
     insert,
     deletes,
     update,
-    getYoungOrPrivateOwner
+    getYoungOrPrivateOwner,
+    getPrivateShipOwners
 }

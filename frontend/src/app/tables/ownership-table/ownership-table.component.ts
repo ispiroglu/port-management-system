@@ -11,6 +11,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class OwnershipTableComponent implements OnInit {
   domain: string = "ownership";
+  selectedOwnership: OwnershipModel;
   ownershipList: OwnershipModel[] = [
     new OwnershipModel(1, 11111111111, "2022-15-2", 1),
   ];
@@ -56,7 +57,22 @@ export class OwnershipTableComponent implements OnInit {
     this.initTable();
   }
 
-  onClickUpdate() {}
+  onClickUpdate() {
+    this.dataService
+      .updateOnDomain(this.domain, this.queryForm.value, {
+        shipid: this.selectedOwnership.shipid,
+        citizenid: this.selectedOwnership.citizenid,
+      })
+      .subscribe(
+        (response) => {},
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error.detail);
+        }
+      );
+    this.toastr.info("Shift hours checker function has been triggered. ");
+    this.initTable();
+  }
 
   onClickDelete() {
     this.dataService
@@ -68,6 +84,11 @@ export class OwnershipTableComponent implements OnInit {
           this.toastr.error(error.error.detail);
         }
       );
+  }
+
+  onClickItem(ownership: OwnershipModel) {
+    this.selectedOwnership = ownership;
+    this.queryForm.patchValue(ownership);
   }
 
   private initForm() {
