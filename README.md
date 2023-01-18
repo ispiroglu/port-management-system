@@ -3,8 +3,11 @@
 Bu projede kullanılan teknolojiler aşağıdaki gibidir:
 * Node
 * Angular
+* Postgresql
 
 Projeyi ayağa kaldırabilmek için Node - NPM, Nodemon ve Angular uygulamalarının kurulduğuna emin olunuz.
+
+Projenin üzerinde çalışacağı Database şemasının kurulabilmesi için ```sql/init_database.sql``` database üzerinde çalıştırmanız gerekmektedir. 
 
 Sonrasında projeyi ayağa kaldırabilmek adına aşağıdaki komutları uygulayabilirsiniz. 
 
