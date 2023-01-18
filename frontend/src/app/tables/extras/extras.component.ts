@@ -28,6 +28,7 @@ export class ExtrasComponent {
     this.dataService
       .get<any>(`http://127.0.0.1:3000/member/getOldAndMerchant`)
       .subscribe((response) => {
+        this.latestQuery = response.body.query;
         this.tableHeaders = response.body.columns;
         const rows = response.body.rows;
         let elements = [];
@@ -44,6 +45,7 @@ export class ExtrasComponent {
     this.dataService
       .get<any>(`http://127.0.0.1:3000/owner/getYoungOrPrivate`)
       .subscribe((response) => {
+        this.latestQuery = response.body.query;
         this.tableHeaders = response.body.columns;
         const rows = response.body.rows;
         let elements = [];
