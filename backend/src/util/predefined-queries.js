@@ -28,10 +28,10 @@ where ship.taxrate != 0.0
 `;
 
 const HAVING_SHIPS_THAT_HAVE_MIN_ONE_WORKER = `
-select crew.shipid
+select crew.shipid, ship.shipname
 from ship,crew,ship_worker
 where ship_worker.citizenid = crew.citizenid and crew.shipid=ship.shipid 
-group by crew.shipid
+group by crew.shipid, ship.shipname
 having count(*)>1
 `;
 
